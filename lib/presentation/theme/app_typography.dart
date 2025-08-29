@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/contants/app_color_path.dart';
+import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
-class AppTextStyle {
+class AppTypography {
   static final TextStyle textFont18W600 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: AppColorPath.black,
+    color: AppColorSchemes.black,
   );
   static final TextStyle textFont48W600 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 48,
     fontWeight: FontWeight.w600,
-    color: AppColorPath.white,
+    color: AppColorSchemes.white,
   );
   static final TextStyle textFontI32W800 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 32,
     fontStyle: FontStyle.italic,
     fontWeight: FontWeight.w800,
-    color: AppColorPath.white,
+    color: AppColorSchemes.white,
   );
   static final TextStyle textFontI14W500 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,
 
     fontWeight: FontWeight.w500,
-    color: AppColorPath.white,
+    color: AppColorSchemes.white,
   );
 }

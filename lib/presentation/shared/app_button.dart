@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/components/app_text.dart';
-import 'package:groceries_app/components/app_text_style.dart';
-import 'package:groceries_app/contants/app_color_path.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class AppButton extends StatelessWidget {
   final String content;
@@ -24,14 +24,14 @@ class AppButton extends StatelessWidget {
         width: width,
         height: (67 / 896) * context.screenHeight,
         decoration: BoxDecoration(
-          color: AppColorPath.green,
+          color: AppColorSchemes.green,
           borderRadius: BorderRadius.circular(59),
         ),
         child: Center(
           child: AppText(
             title: content,
-            style: AppTextStyle.textFont18W600.copyWith(
-              color: AppColorPath.white,
+            style: AppTypography.textFont18W600.copyWith(
+              color: AppColorSchemes.white,
               fontSize: 17.6,
             ),
           ),

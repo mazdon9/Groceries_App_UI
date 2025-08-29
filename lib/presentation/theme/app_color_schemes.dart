@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColorPath {
+class AppColorSchemes {
   static final Color green = Color(0xff53B175);
   static final Color black = Color(0xff060918);
   static final Color white = Color(0xFFFFFFFF);

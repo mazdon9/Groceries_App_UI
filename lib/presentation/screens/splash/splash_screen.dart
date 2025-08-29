@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/components/app_text.dart';
-import 'package:groceries_app/components/app_text_style.dart';
-import 'package:groceries_app/contants/app_color_path.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColorPath.green,
+      backgroundColor: AppColorSchemes.green,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   SizedBox(height: 5),
                   AppText(
                     title: 'online groceriet',
-                    style: AppTextStyle.textFontI14W500.copyWith(
-                      color: AppColorPath.white,
+                    style: AppTypography.textFontI14W500.copyWith(
+                      color: AppColorSchemes.white,
                       letterSpacing: 4,
                     ),
                   ),

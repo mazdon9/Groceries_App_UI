@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/routes/app_routers.dart';
-
-void main() {
-  runApp(const GroceriesApp());
-}
+import 'package:groceries_app/presentation/routes/app_routers.dart';
 
 class GroceriesApp extends StatelessWidget {
   const GroceriesApp({super.key});
