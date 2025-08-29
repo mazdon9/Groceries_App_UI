@@ -4,8 +4,21 @@ import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/contants/app_color_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(context, 'onboarding-screen');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
