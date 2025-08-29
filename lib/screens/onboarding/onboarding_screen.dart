@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/components/app_button.dart';
 import 'package:groceries_app/components/app_text.dart';
 import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/contants/app_color_path.dart';
 import 'package:groceries_app/contants/app_images_path.dart';
+import 'package:groceries_app/core/extentions/context_extentions.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -10,7 +12,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColorPath.green,
+      backgroundColor: AppColorPath.darkBlue,
       body: Stack(
         children: [
           // Positioned.fill(
@@ -40,24 +42,11 @@ class OnboardingScreen extends StatelessWidget {
               const SizedBox(height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColorPath.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: AppText(
-                      title: 'Get Started',
-                      style: AppTextStyle.textFont18W600.copyWith(
-                        color: AppColorPath.white,
-                      ),
-                    ),
-                  ),
+                child: AppButton(
+                  content: 'Get Started',
+                  width: (353 / 414) * context.screenWidth,
+
+                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 48),
