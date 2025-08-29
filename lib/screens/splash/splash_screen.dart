@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:groceries_app/components/app_text.dart';
+import 'package:groceries_app/components/app_text_style.dart';
+import 'package:groceries_app/contants/app_color_path.dart';
+import 'package:groceries_app/core/extentions/context_extentions.dart';
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColorPath.green,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: (55 / 414) * context.screenWidth,
+                height: (64 / 896) * context.screenHeight,
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    'assets/images/logo_text.png',
+                    width: (195 / 414) * context.screenWidth,
+                    height: (46 / 896) * context.screenHeight,
+                  ),
+                  SizedBox(height: 5),
+                  AppText(
+                    title: 'online groceriet',
+                    style: AppTextStyle.textFontI14W500.copyWith(
+                      color: AppColorPath.white,
+                      letterSpacing: 4,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
