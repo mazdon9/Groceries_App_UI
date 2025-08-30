@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/contants/app_images_path.dart';
+import 'package:go_router/go_router.dart';
+import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
@@ -25,8 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-              Center(child: Image.asset(AppImagesPath.logo, height: 48)),
-              const SizedBox(height: 32),
+              Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
+              const SizedBox(height: 100),
               Text(
                 'Loging',
                 style: TextStyle(
@@ -113,9 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(color: Colors.grey),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.go('/sign_up');
+                      },
                       child: Text(
-                        'Singup',
+                        'Sign up',
                         style: TextStyle(
                           color: AppColorSchemes.green,
                           fontWeight: FontWeight.w600,

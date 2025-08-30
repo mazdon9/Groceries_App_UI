@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/contants/app_images_path.dart';
+import 'package:go_router/go_router.dart';
+import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -26,8 +27,8 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-              Center(child: Image.asset(AppImagesPath.logo, height: 48)),
-              const SizedBox(height: 32),
+              Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
+              const SizedBox(height: 100),
               Text(
                 'Sign Up',
                 style: TextStyle(
@@ -128,9 +129,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: TextStyle(color: Colors.grey),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.go('/login');
+                      },
                       child: Text(
-                        'Singup',
+                        'Login',
                         style: TextStyle(
                           color: AppColorSchemes.green,
                           fontWeight: FontWeight.w600,
