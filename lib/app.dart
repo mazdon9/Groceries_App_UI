@@ -7,14 +7,13 @@ class GroceriesApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Groceries App UI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      initialRoute: AppRoutes.splashScreenRouter,
-      routes: AppRoutes.routes,
+      routerConfig: appRouter,
     );
   }
 }
