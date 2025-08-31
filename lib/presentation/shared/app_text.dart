@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
 class AppText extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class AppText extends StatelessWidget {
       style:
           style ??
           TextStyle(
-            color: Colors.white,
+            color: AppColorSchemes.white,
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),

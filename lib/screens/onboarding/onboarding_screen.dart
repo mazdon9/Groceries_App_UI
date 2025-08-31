@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_app/components/app_text_style.dart';
-import 'package:groceries_app/contants/app_images_path.dart';
+import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
@@ -15,12 +15,12 @@ class OnboardingScreen extends StatelessWidget {
       backgroundColor: AppColorSchemes.darkBlue,
       body: Stack(
         children: [
-          // Positioned.fill(
-          //   child: Image.asset(
-          //     AppImagesPath.backgroundOnboarding,
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
+          Positioned.fill(
+            child: Image.asset(
+              AppImagesPath.backgroundOnboarding,
+              fit: BoxFit.cover,
+            ),
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
               AppText(
                 title: 'Get your groceries in as fast as one hour',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.textFontI14W500,
+                style: AppTextStyle.textFont14W500,
               ),
               const SizedBox(height: 32),
               Padding(

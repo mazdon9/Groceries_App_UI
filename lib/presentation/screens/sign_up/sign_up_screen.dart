@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
@@ -29,22 +31,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 32),
               Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
               const SizedBox(height: 100),
-              Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 28,
-                ),
-              ),
+              AppText(title: 'Sign Up', style: AppTextStyle.textFont26W600),
               const SizedBox(height: 8),
-              Text(
-                'Enter your credentials to continue',
-                style: TextStyle(
-                  fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: Colors.grey,
+              AppText(
+                title: 'Enter your credentials to continue',
+                style: AppTextStyle.textFont16W500.copyWith(
+                  color: AppColorSchemes.grey,
                 ),
               ),
               const SizedBox(height: 32),
@@ -78,23 +70,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 8),
-              Text.rich(
-                TextSpan(
+              const SizedBox(height: 20),
+              RichText(
+                text: TextSpan(
                   text: 'By continuing you agree to our ',
-                  style: const TextStyle(color: Colors.grey),
+                  style: AppTextStyle.textFont14W500.copyWith(
+                    color: AppColorSchemes.grey,
+                  ),
                   children: [
                     TextSpan(
                       text: 'Terms of Service',
-                      style: TextStyle(color: AppColorSchemes.green),
+                      style: AppTextStyle.textFont14W500.copyWith(
+                        color: AppColorSchemes.green,
+                      ),
                     ),
-                    const TextSpan(text: ' and '),
+                    TextSpan(
+                      text: ' and ',
+                      style: AppTextStyle.textFont14W500.copyWith(
+                        color: AppColorSchemes.grey,
+                      ),
+                    ),
                     TextSpan(
                       text: 'Privacy Policy.',
-                      style: TextStyle(color: AppColorSchemes.green),
+                      style: AppTextStyle.textFont14W500.copyWith(
+                        color: AppColorSchemes.green,
+                      ),
                     ),
                   ],
                 ),
+                textAlign: TextAlign.left,
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -108,13 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   onPressed: () {},
-                  child: const Text(
-                    'Sing Up',
-                    style: TextStyle(
-                      fontFamily: 'Gilroy',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.white,
+                  child: AppText(
+                    title: 'Sing Up',
+                    style: AppTextStyle.textFont18W600.copyWith(
+                      color: AppColorSchemes.white,
                     ),
                   ),
                 ),
@@ -124,19 +125,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(color: Colors.grey),
+                    AppText(
+                      title: "Already have an account? ",
+                      style: TextStyle(color: AppColorSchemes.grey),
                     ),
                     GestureDetector(
                       onTap: () {
                         context.go('/login');
                       },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
+                      child: AppText(
+                        title: 'Login',
+                        style: AppTextStyle.textFont14W500.copyWith(
                           color: AppColorSchemes.green,
-                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

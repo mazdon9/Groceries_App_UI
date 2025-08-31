@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 
@@ -28,22 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 32),
               Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
               const SizedBox(height: 100),
-              Text(
-                'Loging',
-                style: TextStyle(
-                  fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 28,
-                ),
-              ),
+              AppText(title: 'Login', style: AppTextStyle.textFont26W600),
               const SizedBox(height: 8),
-              Text(
-                'Enter your emails and password',
-                style: TextStyle(
-                  fontFamily: 'Gilroy',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: Colors.grey,
+              AppText(
+                title: 'Enter your emails and password',
+                style: AppTextStyle.textFont16W500.copyWith(
+                  color: AppColorSchemes.grey,
                 ),
               ),
               const SizedBox(height: 32),
@@ -75,9 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Colors.grey),
+                  child: AppText(
+                    title: 'Forgot Password?',
+                    style: TextStyle(color: AppColorSchemes.grey),
                   ),
                 ),
               ),
@@ -93,13 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   onPressed: () {},
-                  child: const Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontFamily: 'Gilroy',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.white,
+                  child: AppText(
+                    title: 'Log In',
+                    style: AppTextStyle.textFont18W600.copyWith(
+                      color: AppColorSchemes.white,
                     ),
                   ),
                 ),
@@ -109,17 +98,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Don't have an account? ",
-                      style: TextStyle(color: Colors.grey),
+                    AppText(
+                      title: "Don't have an account? ",
+                      style: AppTextStyle.textFont18W600.copyWith(
+                        color: AppColorSchemes.grey,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
                         context.go('/sign_up');
                       },
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(
+                      child: AppText(
+                        title: 'Sign up',
+                        style: AppTextStyle.textFont18W600.copyWith(
                           color: AppColorSchemes.green,
                           fontWeight: FontWeight.w600,
                         ),

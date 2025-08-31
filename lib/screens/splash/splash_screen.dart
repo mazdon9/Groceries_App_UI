@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, 'onboarding-screen');
+      context.go('/onboarding-screen');
     });
   }
 
@@ -46,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   SizedBox(height: 5),
                   AppText(
-                    title: 'online groceriet',
-                    style: AppTextStyle.textFontI14W500.copyWith(
+                    title: 'online groceries',
+                    style: AppTextStyle.textFont14W500.copyWith(
                       color: AppColorSchemes.white,
                       letterSpacing: 4,
                     ),

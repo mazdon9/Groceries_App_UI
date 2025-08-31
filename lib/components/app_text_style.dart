@@ -14,18 +14,39 @@ class AppTextStyle {
     fontWeight: FontWeight.w600,
     color: AppColorSchemes.white,
   );
-  static final TextStyle textFontI32W800 = TextStyle(
+  static final TextStyle textFont26W600 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 26,
+    fontWeight: FontWeight.w600,
+    color: AppColorSchemes.black,
+  );
+  static final TextStyle textFont32W800 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 32,
     fontStyle: FontStyle.italic,
     fontWeight: FontWeight.w800,
     color: AppColorSchemes.white,
   );
-  static final TextStyle textFontI14W500 = TextStyle(
+  static final TextStyle textFont14W500 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 14,
 
     fontWeight: FontWeight.w500,
     color: AppColorSchemes.white,
+  );
+  static final TextStyle textFont16W500 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+
+    fontWeight: FontWeight.w500,
+    color: AppColorSchemes.white,
+  );
+
+  static final TextStyle textFontI16W500 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+
+    fontWeight: FontWeight.w500,
+    color: AppColorSchemes.grey,
   );
 }
