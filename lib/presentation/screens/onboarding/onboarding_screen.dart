@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/data/datasources/local/local_storage.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
@@ -47,8 +48,9 @@ class OnboardingScreen extends StatelessWidget {
                   content: 'Get Started',
                   width: (353 / 414) * context.screenWidth,
 
-                  onTap: () {
-                    // Navigate to the next screen
+                  onTap: () async {
+                    // Lưu trạng thái onboarding đã hoàn thành
+                    await LocalStorage.instance.setOnboardingCompleted();
                     context.go('/login');
                   },
                 ),

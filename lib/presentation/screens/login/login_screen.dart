@@ -84,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/dashboard');
+                  },
                   child: AppText(
                     title: 'Log In',
                     style: AppTextStyle.textFont18W600.copyWith(
