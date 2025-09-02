@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class AppTextField extends StatelessWidget {
   final String label;
@@ -29,7 +29,7 @@ class AppTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: AppTextStyle.textFont16W500.copyWith(
+          style: AppTypography.textFont16W500.copyWith(
             color: AppColorSchemes.grey,
           ),
         ),
@@ -42,7 +42,7 @@ class AppTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint,
             suffixIcon: suffixIcon,
-            hintStyle: AppTextStyle.textFont14W500.copyWith(
+            hintStyle: AppTypography.textFont14W500.copyWith(
               color: AppColorSchemes.grey.withAlpha(90),
             ),
             border: const UnderlineInputBorder(),

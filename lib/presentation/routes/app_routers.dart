@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:groceries_app/presentation/screens/accout/account_screen.dart';
+import 'package:groceries_app/presentation/screens/account/account_screen.dart';
 import 'package:groceries_app/presentation/screens/cart/cart_screen.dart';
 import 'package:groceries_app/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:groceries_app/presentation/screens/explore/explore_screen.dart';

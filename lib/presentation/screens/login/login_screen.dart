@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,11 +30,11 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 32),
               Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
               const SizedBox(height: 100),
-              AppText(title: 'Login', style: AppTextStyle.textFont26W600),
+              AppText(title: 'Login', style: AppTypography.textFont26W600),
               const SizedBox(height: 8),
               AppText(
                 title: 'Enter your emails and password',
-                style: AppTextStyle.textFont16W500.copyWith(
+                style: AppTypography.textFont16W500.copyWith(
                   color: AppColorSchemes.grey,
                 ),
               ),
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: AppText(
                     title: 'Log In',
-                    style: AppTextStyle.textFont18W600.copyWith(
+                    style: AppTypography.textFont18W600.copyWith(
                       color: AppColorSchemes.white,
                     ),
                   ),
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     AppText(
                       title: "Don't have an account? ",
-                      style: AppTextStyle.textFont18W600.copyWith(
+                      style: AppTypography.textFont18W600.copyWith(
                         color: AppColorSchemes.grey,
                       ),
                     ),
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: AppText(
                         title: 'Sign up',
-                        style: AppTextStyle.textFont18W600.copyWith(
+                        style: AppTypography.textFont18W600.copyWith(
                           color: AppColorSchemes.green,
                           fontWeight: FontWeight.w600,
                         ),

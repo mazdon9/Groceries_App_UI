@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/shared/app_text_field.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -31,11 +31,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 32),
               Center(child: Image.asset(AppImagesPath.logoOrange, height: 48)),
               const SizedBox(height: 100),
-              AppText(title: 'Sign Up', style: AppTextStyle.textFont26W600),
+              AppText(title: 'Sign Up', style: AppTypography.textFont26W600),
               const SizedBox(height: 8),
               AppText(
                 title: 'Enter your credentials to continue',
-                style: AppTextStyle.textFont16W500.copyWith(
+                style: AppTypography.textFont16W500.copyWith(
                   color: AppColorSchemes.grey,
                 ),
               ),
@@ -74,25 +74,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               RichText(
                 text: TextSpan(
                   text: 'By continuing you agree to our ',
-                  style: AppTextStyle.textFont14W500.copyWith(
+                  style: AppTypography.textFont14W500.copyWith(
                     color: AppColorSchemes.grey,
                   ),
                   children: [
                     TextSpan(
                       text: 'Terms of Service',
-                      style: AppTextStyle.textFont14W500.copyWith(
+                      style: AppTypography.textFont14W500.copyWith(
                         color: AppColorSchemes.green,
                       ),
                     ),
                     TextSpan(
                       text: ' and ',
-                      style: AppTextStyle.textFont14W500.copyWith(
+                      style: AppTypography.textFont14W500.copyWith(
                         color: AppColorSchemes.grey,
                       ),
                     ),
                     TextSpan(
                       text: 'Privacy Policy.',
-                      style: AppTextStyle.textFont14W500.copyWith(
+                      style: AppTypography.textFont14W500.copyWith(
                         color: AppColorSchemes.green,
                       ),
                     ),
@@ -114,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: () {},
                   child: AppText(
                     title: 'Sing Up',
-                    style: AppTextStyle.textFont18W600.copyWith(
+                    style: AppTypography.textFont18W600.copyWith(
                       color: AppColorSchemes.white,
                     ),
                   ),
@@ -135,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: AppText(
                         title: 'Login',
-                        style: AppTextStyle.textFont14W500.copyWith(
+                        style: AppTypography.textFont14W500.copyWith(
                           color: AppColorSchemes.green,
                         ),
                       ),

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/screens/account/account_screen.dart';
+import 'package:groceries_app/presentation/screens/cart/cart_screen.dart';
+import 'package:groceries_app/presentation/screens/explore/explore_screen.dart';
+import 'package:groceries_app/presentation/screens/favorite/favorite_screen.dart';
+import 'package:groceries_app/presentation/screens/shop/shop_screen.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -27,23 +32,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          // Replace with your actual widgets for each tab
-          Center(child: Text('Shop')),
-          Center(child: Text('Explore')),
-          Center(child: Text('Cart')),
-          Center(child: Text('Favorite')),
-          Center(child: Text('Account')),
+          ShopScreen(),
+          ExploreScreen(),
+          CartScreen(),
+          FavoriteScreen(),
+          AccountScreen(),
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.only(top: 17),
+        padding: EdgeInsets.only(top: 17, left: 30, right: 30),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
-
-          borderRadius: BorderRadius.all(Radius.circular(50)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
-              color: AppColorSchemes.black.withAlpha(30),
+              color: Colors.black.withAlpha(50),
               blurRadius: 12,
               offset: Offset(0, -2),
             ),
@@ -51,16 +54,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Theme.of(context).colorScheme.surface,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
-
           selectedItemColor: AppColorSchemes.green,
           unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
           selectedLabelStyle: AppTypography.textFontI14W500.copyWith(
             color: AppColorSchemes.green,
           ),
-          unselectedLabelStyle: AppTypography.textFontI14W500.copyWith(
+          unselectedLabelStyle: AppTypography.textFontI12W500.copyWith(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
           items: [

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -31,13 +31,13 @@ class OnboardingScreen extends StatelessWidget {
               AppText(
                 title: 'Welcome\nto our store',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.textFont48W600,
+                style: AppTypography.textFont48W600,
               ),
               const SizedBox(height: 12),
               AppText(
                 title: 'Get your groceries in as fast as one hour',
                 textAlign: TextAlign.center,
-                style: AppTextStyle.textFont14W500,
+                style: AppTypography.textFont14W500,
               ),
               const SizedBox(height: 32),
               Padding(

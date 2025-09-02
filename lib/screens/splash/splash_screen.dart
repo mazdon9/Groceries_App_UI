@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:groceries_app/components/app_text_style.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   SizedBox(height: 5),
                   AppText(
                     title: 'online groceries',
-                    style: AppTextStyle.textFont14W500.copyWith(
+                    style: AppTypography.textFont14W500.copyWith(
                       color: AppColorSchemes.white,
                       letterSpacing: 4,
                     ),
