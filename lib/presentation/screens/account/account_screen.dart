@@ -16,7 +16,7 @@ class AccountScreen extends StatelessWidget {
       backgroundColor: AppColorSchemes.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 56),
+          padding: const EdgeInsets.only(top: 55),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
