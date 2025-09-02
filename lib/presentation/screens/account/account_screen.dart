@@ -66,7 +66,7 @@ class AccountScreen extends StatelessWidget {
                 title: 'About',
                 onTap: () {},
               ),
-              const SizedBox(height: 52),
+              const SizedBox(height: 53),
               AppButton(
                 content: 'Log Out',
                 textStyle: AppTypography.textFont18W600.copyWith(
