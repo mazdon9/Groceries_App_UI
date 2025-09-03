@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
-import 'package:groceries_app/presentation/theme/app_typography.dart';
+import 'package:groceries_app/presentation/theme/theme.dart';
 
 class AppTextField extends StatelessWidget {
   final String label;

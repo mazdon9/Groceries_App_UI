@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/app_imports.dart';
 import 'package:groceries_app/presentation/screens/account/account_screen.dart';
 import 'package:groceries_app/presentation/screens/cart/cart_screen.dart';
 import 'package:groceries_app/presentation/screens/explore/explore_screen.dart';
 import 'package:groceries_app/presentation/screens/favorite/favorite_screen.dart';
 import 'package:groceries_app/presentation/screens/shop/shop_screen.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
-import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});

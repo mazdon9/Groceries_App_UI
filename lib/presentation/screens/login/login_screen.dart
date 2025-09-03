@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
-import 'package:groceries_app/presentation/shared/app_text.dart';
-import 'package:groceries_app/presentation/shared/app_text_field.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
-import 'package:groceries_app/presentation/theme/app_typography.dart';
+import 'package:groceries_app/presentation/app_imports.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

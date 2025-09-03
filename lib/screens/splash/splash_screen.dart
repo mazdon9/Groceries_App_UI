@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
-import 'package:groceries_app/presentation/shared/app_text.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
-import 'package:groceries_app/presentation/theme/app_typography.dart';
+import 'package:groceries_app/presentation/app_imports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

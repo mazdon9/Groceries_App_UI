@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
   final Color? backgroundColor;
   final TextStyle? textStyle;
   final Border? borderColors;
+  final String? iconPath;
 
   const AppButton({
     required this.content,
@@ -20,6 +21,7 @@ class AppButton extends StatelessWidget {
     super.key,
     this.textStyle,
     this.borderColors,
+    this.iconPath,
   });
 
   @override
@@ -35,15 +37,38 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(59),
         ),
         child: Center(
-          child: AppText(
-            title: content,
-            style:
-                textStyle ??
-                AppTypography.textFont18W600.copyWith(
-                  color: backgroundColor == null
-                      ? AppColorSchemes.white
-                      : AppColorSchemes.black,
+          child: Row(
+            children: [
+              if (iconPath != null)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 25,
+                    top: 25,
+                    bottom: 25,
+                    right: 0,
+                  ),
+                  child: Image.asset(
+                    iconPath!,
+                    color: AppColorSchemes.green,
+                    width: 24,
+                    height: 24,
+                  ),
                 ),
+              Expanded(
+                child: Center(
+                  child: AppText(
+                    title: content,
+                    style:
+                        textStyle ??
+                        AppTypography.textFont18W600.copyWith(
+                          color: backgroundColor == null
+                              ? AppColorSchemes.white
+                              : AppColorSchemes.green,
+                        ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
