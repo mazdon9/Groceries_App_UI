@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/data/datasources/local/local_storage.dart';
+import 'package:groceries_app/di/injector.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -19,8 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () async {
       // Make sure LocalStorage is initialized
-      await LocalStorage.instance.init();
-      final completed = await LocalStorage.instance.getOnboardingCompleted();
+      final completed = await getIt<LocalStorage>().getOnboardingCompleted();
       if (completed) {
         context.go('/login');
       } else {

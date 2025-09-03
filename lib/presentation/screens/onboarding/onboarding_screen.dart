@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/data/datasources/local/local_storage.dart';
+import 'package:groceries_app/di/injector.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
@@ -50,7 +51,7 @@ class OnboardingScreen extends StatelessWidget {
 
                   onTap: () async {
                     // Lưu trạng thái onboarding đã hoàn thành
-                    await LocalStorage.instance.setOnboardingCompleted();
+                    await getIt<LocalStorage>().setOnboardingCompleted();
                     context.go('/login');
                   },
                 ),

@@ -1,16 +1,19 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@Singleton()
 class LocalStorage {
-  LocalStorage._privateConstructor();
-  static final LocalStorage _instance = LocalStorage._privateConstructor();
-  static LocalStorage get instance => _instance;
+  final SharedPreferences _prefs;
+  final FlutterSecureStorage _secureStorage;
 
+  LocalStorage(this._prefs, this._secureStorage);
+
+  /// Delare key
   static const String onboardingCompleted = "onboarding_completed";
-  late SharedPreferences _prefs;
+  static const String accessToken = 'access-token';
 
-  Future<void> init() async {
-    _prefs = await SharedPreferences.getInstance();
-  }
+  /// Function
 
   Future<void> setOnboardingCompleted({bool value = true}) async {
     await _prefs.setBool(onboardingCompleted, value);
@@ -18,5 +21,13 @@ class LocalStorage {
 
   Future<bool> getOnboardingCompleted() async {
     return _prefs.getBool(onboardingCompleted) ?? false;
+  }
+
+  Future<void> setAccessToken(String accessToken) async {
+    await _secureStorage.write(key: accessToken, value: accessToken);
+  }
+
+  Future<String?> getAccessToken() async {
+    return _secureStorage.read(key: accessToken);
   }
 }

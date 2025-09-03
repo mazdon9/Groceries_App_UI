@@ -19,38 +19,36 @@ class AccountSettingItemWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: (58 / 896) * context.screenHeight,
+        // height: (58 / 896) * context.screenHeight,
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(color: AppColorSchemes.black.withAlpha(70)),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Image.asset(
-                iconPath,
-                width: 24,
-                height: 24,
-                color: AppColorSchemes.black,
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  title,
-                  style: AppTypography.textFont18W600.copyWith(
-                    color: AppColorSchemes.black,
-                  ),
+        padding: EdgeInsets.all(20),
+        child: Row(
+          children: [
+            Image.asset(
+              iconPath,
+              width: 24,
+              height: 24,
+              color: AppColorSchemes.black,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                title,
+                style: AppTypography.textFont18W600.copyWith(
+                  color: AppColorSchemes.black,
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: AppColorSchemes.grey,
-                size: 16,
-              ),
-            ],
-          ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppColorSchemes.grey,
+              size: 16,
+            ),
+          ],
         ),
       ),
     );

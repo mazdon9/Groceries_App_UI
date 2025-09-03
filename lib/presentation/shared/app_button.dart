@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -30,46 +30,37 @@ class AppButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width,
-        height: (67 / 896) * context.screenHeight,
+        // height: 67.h,
         decoration: BoxDecoration(
           border: borderColors,
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(59),
+          borderRadius: BorderRadius.circular(59.r),
         ),
-        child: Center(
-          child: Row(
-            children: [
-              if (iconPath != null)
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25,
-                    top: 25,
-                    bottom: 25,
-                    right: 0,
-                  ),
-                  child: Image.asset(
-                    iconPath!,
-                    color: AppColorSchemes.green,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              Expanded(
-                child: Center(
-                  child: AppText(
-                    title: content,
-                    style:
-                        textStyle ??
-                        AppTypography.textFont18W600.copyWith(
-                          color: backgroundColor == null
-                              ? AppColorSchemes.white
-                              : AppColorSchemes.green,
-                        ),
-                  ),
-                ),
+        padding: EdgeInsets.symmetric(vertical: 22.5.h, horizontal: 24.w),
+        child: Row(
+          children: [
+            if (iconPath != null)
+              Image.asset(
+                iconPath!,
+                color: AppColorSchemes.green,
+                width: 24.w,
+                height: 24.w,
               ),
-            ],
-          ),
+            Expanded(
+              child: AppText(
+                title: content,
+                textAlign: TextAlign.center,
+                style:
+                    textStyle ??
+                    AppTypography.textFont18W600.copyWith(
+                      color: backgroundColor == null
+                          ? AppColorSchemes.white
+                          : AppColorSchemes.green,
+                    ),
+              ),
+            ),
+            if (iconPath != null) SizedBox(width: 24.w),
+          ],
         ),
       ),
     );
