@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/data/datasources/local/local_storage.dart';
+import 'package:groceries_app/di/injector.dart';
 import 'package:groceries_app/presentation/app_imports.dart';
+import 'package:groceries_app/presentation/bloc/account/account_bloc.dart';
+import 'package:groceries_app/presentation/bloc/account/account_event.dart';
+import 'package:groceries_app/presentation/bloc/account/account_state.dart';
+import 'package:groceries_app/presentation/error/failure_mapper.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          AccountBloc(FailureMapper())..add(OnGetUserInfoAccountEvent()),
+      child: AccountView(),
+    );
+  }
+}
+
+class AccountView extends StatelessWidget {
+  const AccountView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +36,17 @@ class AccountScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AccountProfileWidget(
-                name: 'Afsar Hossen',
-                email: 'imshuvo97@gmail.com',
-                avatarPath: AppImagesPath.avatar,
+              BlocBuilder<AccountBloc, AccountState>(
+                builder: (context, state) {
+                  if (state.userInfoEntity != null) {
+                    return AccountProfileWidget(
+                      name: state.userInfoEntity!.fullName,
+                      email: state.userInfoEntity!.email,
+                      avatarPath: state.userInfoEntity!.image,
+                    );
+                  }
+                  return const SizedBox();
+                },
               ),
               const SizedBox(height: 8),
               AccountSettingItemWidget(
@@ -75,7 +102,11 @@ class AccountScreen extends StatelessWidget {
                 ),
                 backgroundColor: AppColorSchemes.greyLight,
                 width: (364 / 414) * context.screenWidth,
-                onTap: () {},
+                onTap: () async {
+                  final accessToken = await getIt<LocalStorage>()
+                      .getAccessToken();
+                  print('object $accessToken');
+                },
               ),
             ],
           ),

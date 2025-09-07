@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/data/datasources/local/local_storage.dart';
 import 'package:groceries_app/di/injector.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -18,13 +19,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () async {
+    Future.delayed(const Duration(seconds: 2), () async {
       // Make sure LocalStorage is initialized
       final completed = await getIt<LocalStorage>().getOnboardingCompleted();
-      if (completed) {
-        context.go('/login');
-      } else {
-        context.go('/onboarding');
+      if (mounted) {
+        if (completed) {
+          context.go(RouteName.loginPath);
+        } else {
+          context.go(RouteName.onboardingPath);
+        }
       }
     });
   }

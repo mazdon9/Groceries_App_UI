@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:groceries_app/core/assets_gen/assets.gen.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/data/datasources/local/local_storage.dart';
@@ -20,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/backgound_onboarding_image.png',
+              Assets.images.backgoundOnboardingImage.path,
               fit: BoxFit.cover,
             ),
           ),

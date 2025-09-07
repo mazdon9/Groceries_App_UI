@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
 import 'package:groceries_app/presentation/screens/account/account_screen.dart';
 import 'package:groceries_app/presentation/screens/cart/cart_screen.dart';
 import 'package:groceries_app/presentation/screens/dashboard/dashboard_screen.dart';
@@ -11,56 +12,56 @@ import 'package:groceries_app/presentation/screens/sign_up/sign_up_screen.dart';
 import 'package:groceries_app/presentation/screens/splash/splash_screen.dart';
 
 final GoRouter appRouter = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: RouteName.splashPath,
   routes: [
     GoRoute(
-      path: '/splash',
-      name: 'splash',
+      path: RouteName.splashPath,
+      name: RouteName.splashName,
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: '/onboarding',
-      name: 'onboarding',
+      path: RouteName.onboardingPath,
+      name: RouteName.onboardingName,
       builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
-      path: '/login',
-      name: 'login',
+      path: RouteName.loginPath,
+      name: RouteName.loginName,
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: '/sign_up',
-      name: 'sign_up',
+      path: RouteName.signUpPath,
+      name: RouteName.signUpName,
       builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
-      path: '/dashboard',
-      name: 'dashboard',
+      path: RouteName.dashboardPath,
+      name: RouteName.dashboardName,
       builder: (context, state) => const DashboardScreen(),
     ),
     GoRoute(
-      path: '/account',
-      name: 'account',
+      path: RouteName.accountPath,
+      name: RouteName.accountName,
       builder: (context, state) => const AccountScreen(),
     ),
     GoRoute(
-      path: '/cart',
-      name: 'cart',
+      path: RouteName.cartPath,
+      name: RouteName.cartName,
       builder: (context, state) => const CartScreen(),
     ),
     GoRoute(
-      path: '/explore',
-      name: 'explore',
+      path: RouteName.explorePath,
+      name: RouteName.exploreName,
       builder: (context, state) => const ExploreScreen(),
     ),
     GoRoute(
-      path: '/favorite',
-      name: 'favorite',
+      path: RouteName.favoritePath,
+      name: RouteName.favoriteName,
       builder: (context, state) => const FavoriteScreen(),
     ),
     GoRoute(
-      path: '/shop',
-      name: 'shop',
+      path: RouteName.shopPath,
+      name: RouteName.shopName,
       builder: (context, state) => const ShopScreen(),
     ),
   ],

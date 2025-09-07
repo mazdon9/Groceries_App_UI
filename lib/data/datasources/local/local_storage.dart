@@ -11,7 +11,7 @@ class LocalStorage {
 
   /// Delare key
   static const String onboardingCompleted = "onboarding_completed";
-  static const String accessToken = 'access-token';
+  static const String accessTokenKey = 'access-token';
 
   /// Function
 
@@ -24,10 +24,10 @@ class LocalStorage {
   }
 
   Future<void> setAccessToken(String accessToken) async {
-    await _secureStorage.write(key: accessToken, value: accessToken);
+    await _secureStorage.write(key: accessTokenKey, value: accessToken);
   }
 
   Future<String?> getAccessToken() async {
-    return _secureStorage.read(key: accessToken);
+    return _secureStorage.read(key: accessTokenKey);
   }
 }

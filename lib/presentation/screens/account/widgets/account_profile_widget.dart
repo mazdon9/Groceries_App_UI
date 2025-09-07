@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
@@ -30,7 +31,7 @@ class AccountProfileWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 28,
-              backgroundImage: AssetImage(AppImagesPath.avatar),
+              backgroundImage: CachedNetworkImageProvider(avatarPath),
             ),
             const SizedBox(width: 16),
             Expanded(

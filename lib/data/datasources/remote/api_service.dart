@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:groceries_app/data/models/requests/login_schema.dart';
 import 'package:groceries_app/data/models/responses/login_dto.dart';
+import 'package:groceries_app/data/models/responses/user_info_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,4 +15,7 @@ abstract class ApiService {
 
   @POST('/auth/login')
   Future<LoginDto> login(@Body() LoginSchema loginSchema);
+
+  @GET('/auth/me')
+  Future<UserInfoDto> getUserInfo();
 }
