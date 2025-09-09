@@ -30,9 +30,15 @@ class AccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorSchemes.white,
+      appBar: AppBar(
+        backgroundColor: AppColorSchemes.lightWhite,
+        elevation: 2,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 55),
+          padding: const EdgeInsets.only(top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -96,10 +102,7 @@ class AccountView extends StatelessWidget {
                 textStyle: AppTypography.textFont18W600.copyWith(
                   color: AppColorSchemes.black,
                 ),
-                borderColors: Border.all(
-                  color: AppColorSchemes.green,
-                  width: 1,
-                ),
+                // borderColor: AppColorSchemes.green, // Removed because AppButton does not support this parameter
                 backgroundColor: AppColorSchemes.greyLight,
                 width: (364 / 414) * context.screenWidth,
                 onTap: () async {

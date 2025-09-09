@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.go('/login');
+                        context.go('/dashboard');
                       },
                       child: AppText(
                         title: 'Login',

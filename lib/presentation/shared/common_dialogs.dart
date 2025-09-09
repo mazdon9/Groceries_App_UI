@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/app_imports.dart';
 
 class CommonDialogs {
   static bool isLoading = false;
@@ -13,12 +13,16 @@ class CommonDialogs {
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          content: Row(
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(width: 20),
-              Text('Loading'),
-            ],
+          content: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(width: 20),
+                AppText(title: 'Loading', style: AppTypography.textFont16W500),
+              ],
+            ),
           ),
         );
       },
@@ -42,10 +46,10 @@ class CommonDialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: AppColorSchemes.black,
+          backgroundColor: AppColorSchemes.greyLight,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: BorderSide(color: AppColorSchemes.white),
+            borderRadius: BorderRadius.circular(40),
+            side: BorderSide(color: AppColorSchemes.green),
           ),
           contentPadding: const EdgeInsets.all(16),
           content: Column(
@@ -63,7 +67,7 @@ class CommonDialogs {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
-                    color: AppColorSchemes.white,
+                    color: AppColorSchemes.green,
                   ),
                 ),
               ],
@@ -75,7 +79,7 @@ class CommonDialogs {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
-                  color: AppColorSchemes.white,
+                  color: AppColorSchemes.darkBlue,
                 ),
               ),
               const SizedBox(height: 32),
@@ -90,7 +94,7 @@ class CommonDialogs {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: AppColorSchemes.white,
+                    color: AppColorSchemes.darkBlue,
                   ),
                 ),
               ),
@@ -136,7 +140,7 @@ class CommonDialogs {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
-                    color: AppColorSchemes.white,
+                    color: AppColorSchemes.darkBlue,
                   ),
                 ),
               ],
