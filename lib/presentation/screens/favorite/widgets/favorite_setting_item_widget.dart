@@ -8,6 +8,8 @@ class FavoriteSettingItemWidget extends StatelessWidget {
   final String subtitle;
   final String price;
   final VoidCallback? onTap;
+  final double? width;
+  final double? height;
   const FavoriteSettingItemWidget({
     super.key,
     required this.imagePath,
@@ -15,6 +17,8 @@ class FavoriteSettingItemWidget extends StatelessWidget {
     required this.subtitle,
     required this.price,
     this.onTap,
+    this.width,
+    this.height,
   });
 
   @override
@@ -27,18 +31,20 @@ class FavoriteSettingItemWidget extends StatelessWidget {
             bottom: BorderSide(color: AppColorSchemes.black.withAlpha(70)),
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.only(
+          top: 30,
+          left: 32,
+          bottom: 30,
+          right: 26,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                imagePath,
-                width: 48,
-                height: 48,
-                fit: BoxFit.cover,
-              ),
+            Image.asset(
+              imagePath,
+              width: width ?? 50,
+              height: height ?? 60,
+              fit: BoxFit.cover,
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -55,7 +61,7 @@ class FavoriteSettingItemWidget extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: AppTypography.textFont14W400.copyWith(
+                    style: AppTypography.textFont14W500.copyWith(
                       color: AppColorSchemes.grey,
                     ),
                   ),
@@ -72,13 +78,13 @@ class FavoriteSettingItemWidget extends StatelessWidget {
                     color: AppColorSchemes.black,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColorSchemes.grey,
-                  size: 16,
-                ),
               ],
+            ),
+            SizedBox(width: 15),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: AppColorSchemes.grey,
+              size: 16,
             ),
           ],
         ),

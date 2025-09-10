@@ -49,6 +49,13 @@ class AppTypography {
     fontWeight: FontWeight.w600,
     color: AppColorSchemes.black,
   );
+  static final TextStyle textFont16W600 = TextStyle(
+    fontFamily: 'Gilroy',
+    fontSize: 16,
+
+    fontWeight: FontWeight.w600,
+    color: AppColorSchemes.black,
+  );
   static final TextStyle textFontI12W500 = TextStyle(
     fontFamily: 'Gilroy',
     fontSize: 12,

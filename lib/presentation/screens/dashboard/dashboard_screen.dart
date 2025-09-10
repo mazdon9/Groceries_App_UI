@@ -34,7 +34,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ShopScreen(),
           ExploreScreen(),
           CartScreen(),
-          FavoriteScreen(),
+          FavoriteScreen(
+            onSwitchTab: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
           AccountScreen(),
         ],
       ),

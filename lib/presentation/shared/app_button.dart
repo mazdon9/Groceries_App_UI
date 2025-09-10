@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Border? borderColors;
   final String? iconPath;
+  final Widget? trailing;
 
   const AppButton({
     required this.content,
@@ -22,6 +23,7 @@ class AppButton extends StatelessWidget {
     this.textStyle,
     this.borderColors,
     this.iconPath,
+    this.trailing,
   });
 
   @override
@@ -59,7 +61,7 @@ class AppButton extends StatelessWidget {
                     ),
               ),
             ),
-            if (iconPath != null) SizedBox(width: 24.w),
+            if (trailing != null) ...[SizedBox(width: 12.w), trailing!],
           ],
         ),
       ),
