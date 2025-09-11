@@ -74,7 +74,7 @@ class FavoriteView extends StatelessWidget {
                             width: 31.w,
                             height: 55.h,
                             title: item.title,
-                            subtitle: '1 Price',
+                            subtitle: '1 Item',
                             price: item.price.toString(),
                           );
                         },
