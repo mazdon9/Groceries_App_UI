@@ -30,12 +30,13 @@ class CartSettingItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(left: 25, right: 25),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: AppColorSchemes.black.withAlpha(70)),
         ),
       ),
-      padding: const EdgeInsets.only(top: 30, bottom: 30, left: 14, right: 25),
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

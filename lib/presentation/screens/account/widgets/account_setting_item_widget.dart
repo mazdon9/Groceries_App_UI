@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/presentation/bloc/locale/locale_bloc.dart';
 import 'package:groceries_app/presentation/bloc/locale/locale_event.dart';
 import 'package:groceries_app/presentation/bloc/locale/locale_state.dart';
-import 'package:groceries_app/presentation/bloc/login/login_event.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -70,6 +69,15 @@ class AccountSettingItemWidget extends StatelessWidget {
                             OnChangeLocaleEvent(locale: value ? 'en' : 'vi'),
                           );
                         },
+                        activeColor: AppColorSchemes.green, // Màu nút khi bật
+                        activeTrackColor: AppColorSchemes.green.withAlpha(
+                          30,
+                        ), // Màu track khi bật
+                        inactiveThumbColor:
+                            AppColorSchemes.grey, // Màu nút khi tắt
+                        inactiveTrackColor: AppColorSchemes.grey.withAlpha(
+                          30,
+                        ), // Màu track khi tắt
                       ),
                     ),
                   );

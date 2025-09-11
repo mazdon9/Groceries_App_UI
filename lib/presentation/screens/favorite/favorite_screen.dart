@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/app_imports.dart';
 import 'package:groceries_app/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:groceries_app/presentation/bloc/favorite/favorite_state.dart';
 import 'package:groceries_app/presentation/error/failure_mapper.dart';
 import 'package:groceries_app/presentation/screens/favorite/widgets/favorite_setting_item_widget.dart';
-import 'package:groceries_app/presentation/shared/app_button.dart';
-import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
-import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 typedef SwitchTabCallback = void Function(int index);
 
@@ -33,18 +31,26 @@ class FavoriteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'Favourite',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
+        backgroundColor: AppColorSchemes.white,
+
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(32),
+          child: Container(
+            color: AppColorSchemes.black.withAlpha(70),
+            height: 1.0,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
+
+        elevation: 0,
+        centerTitle: true,
+
+        title: AppText(
+          title: 'Favourite',
+          style: AppTypography.textFont22W600.copyWith(
+            color: AppColorSchemes.black,
+          ),
+        ),
+        iconTheme: IconThemeData(color: AppColorSchemes.black),
       ),
       body: Stack(
         children: [
@@ -68,7 +74,7 @@ class FavoriteView extends StatelessWidget {
                             width: 31.w,
                             height: 55.h,
                             title: item.title,
-                            subtitle: '325ml, Price',
+                            subtitle: '1 Price',
                             price: item.price.toString(),
                           );
                         },

@@ -28,17 +28,16 @@ class FavoriteSettingItemWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsets.only(left: 25, right: 25),
         decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(color: AppColorSchemes.black.withAlpha(70)),
+            bottom: BorderSide(
+              color: AppColorSchemes.black.withAlpha(70),
+              width: 1,
+            ),
           ),
         ),
-        padding: EdgeInsets.only(
-          top: 30.h,
-          left: 32.w,
-          bottom: 30.h,
-          right: 26.w,
-        ),
+        padding: EdgeInsets.only(top: 30.h, bottom: 30.h),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
