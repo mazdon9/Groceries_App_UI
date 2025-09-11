@@ -1,5 +1,7 @@
 import 'package:groceries_app/domain/core/failures.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class FailureMapper {
   FailureMapper();
 
