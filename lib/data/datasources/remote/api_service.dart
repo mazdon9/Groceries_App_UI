@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:groceries_app/data/models/requests/login_schema.dart';
+import 'package:groceries_app/data/models/responses/favorite_product_dto.dart';
 import 'package:groceries_app/data/models/responses/login_dto.dart';
 import 'package:groceries_app/data/models/responses/user_info_dto.dart';
 import 'package:retrofit/retrofit.dart';
@@ -18,4 +19,7 @@ abstract class ApiService {
 
   @GET('/auth/me')
   Future<UserInfoDto> getUserInfo();
+
+  @GET('/carts/{id}')
+  Future<FavoriteProductDto> getFavoriteProducts(@Path('id') int id);
 }

@@ -159,12 +159,97 @@ class $AssetsImagesGen {
   ];
 }
 
+class $AssetsImagesCartGen {
+  const $AssetsImagesCartGen();
+
+  /// File path: assets/images_cart/apple_and_grape_juice_images.png
+  AssetGenImage get appleAndGrapeJuiceImages => const AssetGenImage(
+    'assets/images_cart/apple_and_grape_juice_images.png',
+  );
+
+  /// File path: assets/images_cart/bell_pepper_red_images.png
+  AssetGenImage get bellPepperRedImages =>
+      const AssetGenImage('assets/images_cart/bell_pepper_red_images.png');
+
+  /// File path: assets/images_cart/coca_cola_can_images.png
+  AssetGenImage get cocaColaCanImages =>
+      const AssetGenImage('assets/images_cart/coca_cola_can_images.png');
+
+  /// File path: assets/images_cart/diet_coke_images.png
+  AssetGenImage get dietCokeImages =>
+      const AssetGenImage('assets/images_cart/diet_coke_images.png');
+
+  /// File path: assets/images_cart/egg_chicken_red_images.png
+  AssetGenImage get eggChickenRedImages =>
+      const AssetGenImage('assets/images_cart/egg_chicken_red_images.png');
+
+  /// File path: assets/images_cart/egg_chicken_white_images.png
+  AssetGenImage get eggChickenWhiteImages =>
+      const AssetGenImage('assets/images_cart/egg_chicken_white_images.png');
+
+  /// File path: assets/images_cart/egg_noodles_big_images.png
+  AssetGenImage get eggNoodlesBigImages =>
+      const AssetGenImage('assets/images_cart/egg_noodles_big_images.png');
+
+  /// File path: assets/images_cart/egg_noodles_images.png
+  AssetGenImage get eggNoodlesImages =>
+      const AssetGenImage('assets/images_cart/egg_noodles_images.png');
+
+  /// File path: assets/images_cart/egg_pasta_images.png
+  AssetGenImage get eggPastaImages =>
+      const AssetGenImage('assets/images_cart/egg_pasta_images.png');
+
+  /// File path: assets/images_cart/ginger_images.png
+  AssetGenImage get gingerImages =>
+      const AssetGenImage('assets/images_cart/ginger_images.png');
+
+  /// File path: assets/images_cart/mayonnaise_eggless_images.png
+  AssetGenImage get mayonnaiseEgglessImages =>
+      const AssetGenImage('assets/images_cart/mayonnaise_eggless_images.png');
+
+  /// File path: assets/images_cart/orenge_juice_images.png
+  AssetGenImage get orengeJuiceImages =>
+      const AssetGenImage('assets/images_cart/orenge_juice_images.png');
+
+  /// File path: assets/images_cart/organic_bannanas_images.png
+  AssetGenImage get organicBannanasImages =>
+      const AssetGenImage('assets/images_cart/organic_bannanas_images.png');
+
+  /// File path: assets/images_cart/pepsi_can_images.png
+  AssetGenImage get pepsiCanImages =>
+      const AssetGenImage('assets/images_cart/pepsi_can_images.png');
+
+  /// File path: assets/images_cart/spirte_can_images.png
+  AssetGenImage get spirteCanImages =>
+      const AssetGenImage('assets/images_cart/spirte_can_images.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+    appleAndGrapeJuiceImages,
+    bellPepperRedImages,
+    cocaColaCanImages,
+    dietCokeImages,
+    eggChickenRedImages,
+    eggChickenWhiteImages,
+    eggNoodlesBigImages,
+    eggNoodlesImages,
+    eggPastaImages,
+    gingerImages,
+    mayonnaiseEgglessImages,
+    orengeJuiceImages,
+    organicBannanasImages,
+    pepsiCanImages,
+    spirteCanImages,
+  ];
+}
+
 class Assets {
   const Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsImagesCartGen imagesCart = $AssetsImagesCartGen();
 }
 
 class AssetGenImage {

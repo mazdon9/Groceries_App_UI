@@ -1,6 +1,15 @@
 {
   "@@locale": "vi",
   "getStarted": "Bắt đầu",
-  "welcomeToOurStore": "Chào mừng \nđến với cửa hàng của chúng tôi",
-  "getYourGroceriesFast": "Nhận hàng tạp hóa nhanh nhất chỉ trong một giờ"
+  "welcomeToOurStore": "Chào mừng \nbạn đến với cửa hàng",
+  "getYourGroceriesFast": "Nhận hàng tạp hóa của bạn nhanh chóng chỉ trong 1 giờ",
+  "orders": "Đơn hàng",
+  "myDetails": "Thông tin cá nhân",
+  "deliveryAddress": "Địa chỉ giao hàng",
+  "paymentMethods": "Phương thức thanh toán",
+  "promoCard": "Thẻ khuyến mãi",
+  "notifications": "Thông báo",
+  "help": "Trợ giúp",
+  "about": "Giới thiệu",
+  "language": "Ngôn ngữ"
 }

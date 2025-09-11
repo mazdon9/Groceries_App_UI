@@ -53,7 +53,9 @@ class OnboardingScreen extends StatelessWidget {
                   onTap: () async {
                     // Lưu trạng thái onboarding đã hoàn thành
                     await getIt<LocalStorage>().setOnboardingCompleted();
-                    context.go('/login');
+                    if (context.mounted) {
+                      context.go('/login');
+                    }
                   },
                 ),
               ),

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -31,17 +33,17 @@ class FavoriteSettingItemWidget extends StatelessWidget {
             bottom: BorderSide(color: AppColorSchemes.black.withAlpha(70)),
           ),
         ),
-        padding: const EdgeInsets.only(
-          top: 30,
-          left: 32,
-          bottom: 30,
-          right: 26,
+        padding: EdgeInsets.only(
+          top: 30.h,
+          left: 32.w,
+          bottom: 30.h,
+          right: 26.w,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              imagePath,
+            CachedNetworkImage(
+              imageUrl: imagePath,
               width: width ?? 50,
               height: height ?? 60,
               fit: BoxFit.cover,
@@ -68,17 +70,11 @@ class FavoriteSettingItemWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  price,
-                  style: AppTypography.textFont16W600.copyWith(
-                    color: AppColorSchemes.black,
-                  ),
-                ),
-              ],
+            Text(
+              price,
+              style: AppTypography.textFont16W600.copyWith(
+                color: AppColorSchemes.black,
+              ),
             ),
             SizedBox(width: 15),
             Icon(

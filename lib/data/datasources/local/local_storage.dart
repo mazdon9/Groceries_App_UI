@@ -12,6 +12,7 @@ class LocalStorage {
   /// Delare key
   static const String onboardingCompleted = "onboarding_completed";
   static const String accessTokenKey = 'access-token';
+  static const String localeKey = 'locale_key';
 
   /// Function
 
@@ -29,5 +30,13 @@ class LocalStorage {
 
   Future<String?> getAccessToken() async {
     return _secureStorage.read(key: accessTokenKey);
+  }
+
+  Future<void> setLocale(String locale) async {
+    await _secureStorage.write(key: localeKey, value: locale);
+  }
+
+  Future<String?> getLocale() async {
+    return _secureStorage.read(key: localeKey);
   }
 }

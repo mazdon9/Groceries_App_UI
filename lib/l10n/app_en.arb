@@ -2,5 +2,14 @@
   "@@locale": "en",
   "getStarted": "Get Started",
   "welcomeToOurStore": "Welcome \nto our store",
-  "getYourGroceriesFast": "Ger your groceries in as fast as one hour"
+  "getYourGroceriesFast": "Ger your groceries in as fast as one hour",
+  "orders": "Orders",
+  "myDetails": "My Details",
+  "deliveryAddress": "Delivery Address",
+  "paymentMethods": "Payment Methods",
+  "promoCard": "Promo Card",
+  "notifications": "Notifications",
+  "help": "Help",
+  "about": "About",
+  "language": "Language"
 }

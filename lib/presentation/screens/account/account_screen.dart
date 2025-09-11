@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
-import 'package:groceries_app/data/datasources/local/local_storage.dart';
-import 'package:groceries_app/di/injector.dart';
 import 'package:groceries_app/presentation/app_imports.dart';
 import 'package:groceries_app/presentation/bloc/account/account_bloc.dart';
 import 'package:groceries_app/presentation/bloc/account/account_event.dart';
@@ -57,43 +55,49 @@ class AccountView extends StatelessWidget {
               const SizedBox(height: 8),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.orders,
-                title: 'Orders',
+                title: context.appLocalizations.orders,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.details,
-                title: 'My Details',
+                title: context.appLocalizations.myDetails,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.location,
-                title: 'Delivery Address',
+                title: context.appLocalizations.deliveryAddress,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.payment,
-                title: 'Payment Methods',
+                title: context.appLocalizations.paymentMethods,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.promo,
-                title: 'Promo Cord',
+                title: context.appLocalizations.promoCard,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.bell,
-                title: 'Notifications',
+                title: context.appLocalizations.notifications,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.help,
-                title: 'Help',
+                title: context.appLocalizations.help,
                 onTap: () {},
               ),
               AccountSettingItemWidget(
                 iconPath: AppIconPath.about,
-                title: 'About',
+                title: context.appLocalizations.about,
                 onTap: () {},
+              ),
+              AccountSettingItemWidget(
+                iconPath: AppIconPath.about,
+                title: context.appLocalizations.language,
+                onTap: () {},
+                hasSwitchButton: true,
               ),
               const SizedBox(height: 53),
               AppButton(
@@ -105,11 +109,7 @@ class AccountView extends StatelessWidget {
                 // borderColor: AppColorSchemes.green, // Removed because AppButton does not support this parameter
                 backgroundColor: AppColorSchemes.greyLight,
                 width: (364 / 414) * context.screenWidth,
-                onTap: () async {
-                  final accessToken = await getIt<LocalStorage>()
-                      .getAccessToken();
-                  print('object $accessToken');
-                },
+                onTap: () {},
               ),
             ],
           ),

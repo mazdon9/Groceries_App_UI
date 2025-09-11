@@ -22,10 +22,16 @@ import 'package:groceries_app/data/datasources/remote/api_service.dart'
     as _i138;
 import 'package:groceries_app/data/repositories/auth_repository_impl.dart'
     as _i774;
+import 'package:groceries_app/data/repositories/cart_repository_impl.dart'
+    as _i353;
 import 'package:groceries_app/di/env_module.dart' as _i116;
 import 'package:groceries_app/di/third_party_module.dart' as _i202;
 import 'package:groceries_app/domain/repositories/auth_repository.dart'
     as _i345;
+import 'package:groceries_app/domain/repositories/cart_repository.dart'
+    as _i909;
+import 'package:groceries_app/domain/usecase/get_favorite_products_usecase.dart'
+    as _i368;
 import 'package:groceries_app/domain/usecase/get_info_usecase.dart' as _i84;
 import 'package:groceries_app/domain/usecase/login_usecase.dart' as _i304;
 import 'package:injectable/injectable.dart' as _i526;
@@ -102,11 +108,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i345.AuthRepository>(
       () => _i774.AuthRepositoryImpl(gh<_i138.ApiService>()),
     );
+    gh.lazySingleton<_i909.CartRepository>(
+      () => _i353.CartRepositoryImpl(gh<_i138.ApiService>()),
+    );
     gh.factory<_i304.LoginUsecase>(
       () => _i304.LoginUsecase(gh<_i345.AuthRepository>()),
     );
     gh.factory<_i84.GetInfoUsecase>(
       () => _i84.GetInfoUsecase(gh<_i345.AuthRepository>()),
+    );
+    gh.factory<_i368.GetFavoriteProductsUsecase>(
+      () => _i368.GetFavoriteProductsUsecase(gh<_i909.CartRepository>()),
     );
     return this;
   }
