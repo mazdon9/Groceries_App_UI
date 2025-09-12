@@ -2,7 +2,8 @@ import 'package:groceries_app/data/core/guard.dart';
 import 'package:groceries_app/data/datasources/remote/api_service.dart';
 import 'package:groceries_app/data/mappers/cart_mapper.dart';
 import 'package:groceries_app/data/mappers/list_of_favorite_items_mapper.dart';
-import 'package:groceries_app/data/models/responses/cart_dto.dart';
+import 'package:groceries_app/data/models/params/update_cart_item_params.dart';
+import 'package:groceries_app/data/models/requests/update_a_cart_schema.dart';
 import 'package:groceries_app/domain/core/result.dart';
 import 'package:groceries_app/domain/entities/cart_item_entity.dart';
 import 'package:groceries_app/domain/entities/favorite_item_entity.dart';
@@ -32,17 +33,18 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  ResultFuture<CartEntity> updateCartItemQuantity(
-    int cartId,
-    int productId,
-    int quantity,
-  ) {
+  ResultFuture<CartEntity> updateCartItemQuantity(UpdateCartItemParams params) {
     return guardDio<CartEntity>(() async {
-      final request = UpdateCartRequest(
+      final request = UpdateACartSchema(
         merge: true,
-        products: [UpdateCartItemRequest(id: productId, quantity: quantity)],
+        products: [
+          UpdateACartItemSchema(
+            id: params.productId,
+            quantity: params.quantity,
+          ),
+        ],
       );
-      final responseDTO = await _apiService.updateCart(cartId, request);
+      final responseDTO = await _apiService.updateCart(params.cartId, request);
       return responseDTO.toEntity();
     });
   }

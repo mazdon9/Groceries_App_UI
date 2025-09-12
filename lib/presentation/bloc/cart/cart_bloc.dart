@@ -1,28 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:groceries_app/domain/usecase/delete_cart_usecase.dart';
+import 'package:groceries_app/di/injector.dart';
+import 'package:groceries_app/domain/entities/cart_item_entity.dart';
+import 'package:groceries_app/domain/usecase/delete_a_product_in_cart_usecase.dart';
 import 'package:groceries_app/domain/usecase/get_cart_items_usecase.dart';
 import 'package:groceries_app/domain/usecase/update_cart_item_quantity_usecase.dart';
 import 'package:groceries_app/presentation/bloc/cart/cart_event.dart';
 import 'package:groceries_app/presentation/bloc/cart/cart_state.dart';
 import 'package:groceries_app/presentation/error/failure_mapper.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 class CartBloc extends Bloc<CartEvent, CartState> {
-  final GetCartItemsUsecase getCartItemsUsecase;
-  final UpdateCartItemQuantityUsecase updateCartItemQuantityUsecase;
-  final DeleteCartUsecase deleteCartUsecase;
+  final GetCartItemsUsecase getCartItemsUsecase = getIt<GetCartItemsUsecase>();
+  final UpdateCartItemQuantityUsecase updateCartItemQuantityUsecase =
+      getIt<UpdateCartItemQuantityUsecase>();
+  final DeleteAProductInCartUsecase deleteAProductInCartUsecase =
+      getIt<DeleteAProductInCartUsecase>();
+
   final FailureMapper failureMapper;
 
-  CartBloc(
-    this.getCartItemsUsecase,
-    this.updateCartItemQuantityUsecase,
-    this.deleteCartUsecase,
-    this.failureMapper,
-  ) : super(const CartState()) {
+  CartBloc(this.failureMapper) : super(const CartState()) {
     on<OnGetCartItemsEvent>(_onGetCartItemsEvent);
     on<OnUpdateCartItemQuantityEvent>(_onUpdateCartItemQuantityEvent);
-    on<OnDeleteCartEvent>(_onDeleteCartEvent);
+    on<OnDeleteAProductInCartEvent>(_onDeleteAProductInCartEvent);
     on<OnClearCartErrorMessage>(_onClearCartErrorMessage);
   }
 
@@ -58,12 +56,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   ) async {
     try {
       emit(state.copyWith(isLoading: true));
-      final params = UpdateCartItemParams(
-        cartId: event.cartId,
-        productId: event.productId,
-        quantity: event.quantity,
-      );
-      final result = await updateCartItemQuantityUsecase.call(params);
+      final result = await updateCartItemQuantityUsecase.call(event.params);
       result.fold(
         (failure) {
           emit(
@@ -83,13 +76,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     }
   }
 
-  Future<void> _onDeleteCartEvent(
-    OnDeleteCartEvent event,
+  Future<void> _onDeleteAProductInCartEvent(
+    OnDeleteAProductInCartEvent event,
     Emitter<CartState> emit,
   ) async {
     try {
       emit(state.copyWith(isLoading: true));
-      final result = await deleteCartUsecase.call(event.cartId);
+      final result = await deleteAProductInCartUsecase.call(event.productId);
       result.fold(
         (failure) {
           emit(
@@ -99,7 +92,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           );
         },
         (data) {
-          emit(state.copyWith(cartEntity: data));
+          /// remove a product in cart with productId
+          if (state.cartEntity != null) {
+            /// Update exsiting cartEntity after remove deleled product
+            final newProducts = state.cartEntity!.products
+                .where((e) => e.id != event.productId)
+                .toList();
+
+            emit(
+              state.copyWith(
+                cartEntity: CartEntity(
+                  id: state.cartEntity!.id,
+                  products: newProducts,
+                  total: state.cartEntity!.total,
+                ),
+              ),
+            );
+          }
         },
       );
     } catch (e) {

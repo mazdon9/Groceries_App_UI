@@ -4,19 +4,19 @@ class CartEntity extends Equatable {
   final int id;
   final List<CartItemEntity> products;
   final double total;
-  final double discountedTotal;
-  final int userId;
-  final int totalProducts;
-  final int totalQuantity;
+  // final double discountedTotal;
+  // final int userId;
+  // final int totalProducts;
+  // final int totalQuantity;
 
   const CartEntity({
     required this.id,
     required this.products,
     required this.total,
-    required this.discountedTotal,
-    required this.userId,
-    required this.totalProducts,
-    required this.totalQuantity,
+    // required this.discountedTotal,
+    // required this.userId,
+    // required this.totalProducts,
+    // required this.totalQuantity,
   });
 
   @override
@@ -24,10 +24,10 @@ class CartEntity extends Equatable {
     id,
     products,
     total,
-    discountedTotal,
-    userId,
-    totalProducts,
-    totalQuantity,
+    // discountedTotal,
+    // userId,
+    // totalProducts,
+    // totalQuantity,
   ];
 }
 
@@ -36,9 +36,9 @@ class CartItemEntity extends Equatable {
   final String title;
   final double price;
   final int quantity;
-  final double total;
-  final double discountPercentage;
-  final double discountedTotal;
+  // final double total;
+  // final double discountPercentage;
+  // final double discountedTotal;
   final String thumbnail;
 
   const CartItemEntity({
@@ -46,9 +46,9 @@ class CartItemEntity extends Equatable {
     required this.title,
     required this.price,
     required this.quantity,
-    required this.total,
-    required this.discountPercentage,
-    required this.discountedTotal,
+    // required this.total,
+    // required this.discountPercentage,
+    // required this.discountedTotal,
     required this.thumbnail,
   });
 
@@ -58,9 +58,9 @@ class CartItemEntity extends Equatable {
     title,
     price,
     quantity,
-    total,
-    discountPercentage,
-    discountedTotal,
+    // total,
+    // discountPercentage,
+    // discountedTotal,
     thumbnail,
   ];
 }

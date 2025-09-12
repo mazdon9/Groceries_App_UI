@@ -127,12 +127,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<CartDto> updateCart(int id, UpdateCartRequest request) async {
+  Future<CartDto> updateCart(
+    int id,
+    UpdateACartSchema updateACartSchema,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
+    _data.addAll(updateACartSchema.toJson());
     final _options = _setStreamType<CartDto>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
@@ -179,6 +182,25 @@ class _ApiService implements ApiService {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<void> deleteAProductInCart(int id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/products/${id}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -36,7 +36,7 @@ class CartItemDto {
   final int quantity;
   final double total;
   final double discountPercentage;
-  final double discountedTotal;
+  final double? discountedTotal;
   final String thumbnail;
 
   CartItemDto({
@@ -46,7 +46,7 @@ class CartItemDto {
     required this.quantity,
     required this.total,
     required this.discountPercentage,
-    required this.discountedTotal,
+    this.discountedTotal,
     required this.thumbnail,
   });
 
@@ -54,30 +54,4 @@ class CartItemDto {
       _$CartItemDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$CartItemDtoToJson(this);
-}
-
-@JsonSerializable()
-class UpdateCartRequest {
-  final bool merge;
-  final List<UpdateCartItemRequest> products;
-
-  UpdateCartRequest({required this.merge, required this.products});
-
-  factory UpdateCartRequest.fromJson(Map<String, dynamic> json) =>
-      _$UpdateCartRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UpdateCartRequestToJson(this);
-}
-
-@JsonSerializable()
-class UpdateCartItemRequest {
-  final int id;
-  final int quantity;
-
-  UpdateCartItemRequest({required this.id, required this.quantity});
-
-  factory UpdateCartItemRequest.fromJson(Map<String, dynamic> json) =>
-      _$UpdateCartItemRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UpdateCartItemRequestToJson(this);
 }

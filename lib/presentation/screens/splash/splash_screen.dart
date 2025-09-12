@@ -16,15 +16,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final localStorage = getIt<LocalStorage>();
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () async {
       // Make sure LocalStorage is initialized
-      final completed = await getIt<LocalStorage>().getOnboardingCompleted();
+      final completed = await localStorage.getOnboardingCompleted();
+      final accessToken = await localStorage.getAccessToken();
       if (mounted) {
         if (completed) {
-          context.go(RouteName.loginPath);
+          if (accessToken != null && accessToken.isNotEmpty) {
+            context.go(RouteName.dashboardPath);
+          } else {
+            context.go(RouteName.loginPath);
+          }
         } else {
           context.go(RouteName.onboardingPath);
         }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:groceries_app/data/models/requests/login_schema.dart';
+import 'package:groceries_app/data/models/requests/update_a_cart_schema.dart';
 import 'package:groceries_app/data/models/responses/cart_dto.dart';
 import 'package:groceries_app/data/models/responses/favorite_product_dto.dart';
 import 'package:groceries_app/data/models/responses/login_dto.dart';
@@ -31,9 +32,12 @@ abstract class ApiService {
   @PUT('/carts/{id}')
   Future<CartDto> updateCart(
     @Path('id') int id,
-    @Body() UpdateCartRequest request,
+    @Body() UpdateACartSchema updateACartSchema,
   );
 
   @DELETE('/carts/{id}')
   Future<CartDto> deleteCart(@Path('id') int id);
+
+  @DELETE('/products/{id}')
+  Future<void> deleteAProductInCart(@Path('id') int id);
 }

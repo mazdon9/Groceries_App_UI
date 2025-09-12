@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:groceries_app/data/models/params/update_cart_item_params.dart';
 
 abstract class CartEvent extends Equatable {
   const CartEvent();
@@ -17,27 +18,21 @@ class OnGetCartItemsEvent extends CartEvent {
 }
 
 class OnUpdateCartItemQuantityEvent extends CartEvent {
-  final int cartId;
-  final int productId;
-  final int quantity;
+  final UpdateCartItemParams params;
 
-  const OnUpdateCartItemQuantityEvent({
-    required this.cartId,
-    required this.productId,
-    required this.quantity,
-  });
+  const OnUpdateCartItemQuantityEvent({required this.params});
 
   @override
-  List<Object?> get props => [cartId, productId, quantity];
+  List<Object?> get props => [params];
 }
 
-class OnDeleteCartEvent extends CartEvent {
-  final int cartId;
+class OnDeleteAProductInCartEvent extends CartEvent {
+  final int productId;
 
-  const OnDeleteCartEvent(this.cartId);
+  const OnDeleteAProductInCartEvent(this.productId);
 
   @override
-  List<Object?> get props => [cartId];
+  List<Object?> get props => [productId];
 }
 
 class OnClearCartErrorMessage extends CartEvent {

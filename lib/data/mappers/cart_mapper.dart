@@ -7,10 +7,10 @@ extension CartEntityMapper on CartDto {
       id: id,
       products: products.map((item) => item.toEntity()).toList(),
       total: total,
-      discountedTotal: discountedTotal,
-      userId: userId,
-      totalProducts: totalProducts,
-      totalQuantity: totalQuantity,
+      // discountedTotal: discountedTotal,
+      // userId: userId,
+      // totalProducts: totalProducts,
+      // totalQuantity: totalQuantity,
     );
   }
 }
@@ -22,9 +22,9 @@ extension CartItemEntityMapper on CartItemDto {
       title: title,
       price: price,
       quantity: quantity,
-      total: total,
-      discountPercentage: discountPercentage,
-      discountedTotal: discountedTotal,
+      // total: total,
+      // discountPercentage: discountPercentage,
+      // discountedTotal: discountedTotal,
       thumbnail: thumbnail,
     );
   }

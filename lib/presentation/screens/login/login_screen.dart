@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(FailureMapper()),
+      create: (context) => LoginBloc(FailureMapper(context)),
       child: LoginView(),
     );
   }

@@ -28,7 +28,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       emit(state.copyWith(isLoading: true));
       final result = await loginUsecase.call(
-        LoginSchema(username: event.username, password: event.password),
+        LoginSchema(
+          username: event.username,
+          password: event.password,
+          expiresInMins: 10,
+        ),
       );
       await result.fold(
         (failure) {
@@ -40,6 +44,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         },
         (success) async {
           await localStorage.setAccessToken(success.accessToken);
+
+          /// save refresh token
           final accessToken = localStorage.getAccessToken();
           getIt<AppLogger>().i(
             "accessToken",

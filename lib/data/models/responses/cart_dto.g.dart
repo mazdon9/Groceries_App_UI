@@ -35,7 +35,7 @@ CartItemDto _$CartItemDtoFromJson(Map<String, dynamic> json) => CartItemDto(
   quantity: (json['quantity'] as num).toInt(),
   total: (json['total'] as num).toDouble(),
   discountPercentage: (json['discountPercentage'] as num).toDouble(),
-  discountedTotal: (json['discountedTotal'] as num).toDouble(),
+  discountedTotal: (json['discountedTotal'] as num?)?.toDouble(),
   thumbnail: json['thumbnail'] as String,
 );
 
@@ -50,25 +50,3 @@ Map<String, dynamic> _$CartItemDtoToJson(CartItemDto instance) =>
       'discountedTotal': instance.discountedTotal,
       'thumbnail': instance.thumbnail,
     };
-
-UpdateCartRequest _$UpdateCartRequestFromJson(Map<String, dynamic> json) =>
-    UpdateCartRequest(
-      merge: json['merge'] as bool,
-      products: (json['products'] as List<dynamic>)
-          .map((e) => UpdateCartItemRequest.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$UpdateCartRequestToJson(UpdateCartRequest instance) =>
-    <String, dynamic>{'merge': instance.merge, 'products': instance.products};
-
-UpdateCartItemRequest _$UpdateCartItemRequestFromJson(
-  Map<String, dynamic> json,
-) => UpdateCartItemRequest(
-  id: (json['id'] as num).toInt(),
-  quantity: (json['quantity'] as num).toInt(),
-);
-
-Map<String, dynamic> _$UpdateCartItemRequestToJson(
-  UpdateCartItemRequest instance,
-) => <String, dynamic>{'id': instance.id, 'quantity': instance.quantity};

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
-import 'package:groceries_app/di/injector.dart';
+import 'package:groceries_app/data/models/params/update_cart_item_params.dart';
 import 'package:groceries_app/presentation/bloc/cart/cart_bloc.dart';
 import 'package:groceries_app/presentation/bloc/cart/cart_event.dart';
 import 'package:groceries_app/presentation/bloc/cart/cart_state.dart';
+import 'package:groceries_app/presentation/error/failure_mapper.dart';
 import 'package:groceries_app/presentation/screens/cart/widgets/cart_setting_item_widget.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
@@ -18,7 +19,8 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CartBloc>()..add(const OnGetCartItemsEvent(1)),
+      create: (context) =>
+          CartBloc(FailureMapper(context))..add(const OnGetCartItemsEvent(1)),
       child: const CartView(),
     );
   }
@@ -32,12 +34,6 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<CartBloc>().add(const OnGetCartItemsEvent(1));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,9 +100,11 @@ class _CartViewState extends State<CartView> {
                               onAdd: () {
                                 context.read<CartBloc>().add(
                                   OnUpdateCartItemQuantityEvent(
-                                    cartId: state.cartEntity!.id,
-                                    productId: item.id,
-                                    quantity: item.quantity + 1,
+                                    params: UpdateCartItemParams(
+                                      cartId: state.cartEntity!.id,
+                                      productId: item.id,
+                                      quantity: item.quantity + 1,
+                                    ),
                                   ),
                                 );
                               },
@@ -114,21 +112,21 @@ class _CartViewState extends State<CartView> {
                                 if (item.quantity > 1) {
                                   context.read<CartBloc>().add(
                                     OnUpdateCartItemQuantityEvent(
-                                      cartId: state.cartEntity!.id,
-                                      productId: item.id,
-                                      quantity: item.quantity - 1,
+                                      params: UpdateCartItemParams(
+                                        cartId: state.cartEntity!.id,
+                                        productId: item.id,
+                                        quantity: item.quantity - 1,
+                                      ),
                                     ),
                                   );
+                                } else {
+                                  /// TODO: show dialog inform user
                                 }
                               },
                               onDelete: () {
                                 // For delete individual item, we update quantity to 0
                                 context.read<CartBloc>().add(
-                                  OnUpdateCartItemQuantityEvent(
-                                    cartId: state.cartEntity!.id,
-                                    productId: item.id,
-                                    quantity: 0,
-                                  ),
+                                  OnDeleteAProductInCartEvent(item.id),
                                 );
                               },
                             );
@@ -151,7 +149,7 @@ class _CartViewState extends State<CartView> {
             bottom: 0,
             child: BlocBuilder<CartBloc, CartState>(
               builder: (context, state) {
-                final totalPrice = state.cartEntity?.discountedTotal ?? 0.0;
+                final totalPrice = state.cartEntity?.total ?? 0.0;
                 return Container(
                   padding: const EdgeInsets.all(16.0),
                   child: AppButton(

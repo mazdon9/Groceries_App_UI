@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/app_imports.dart';
@@ -7,6 +8,7 @@ import 'package:groceries_app/presentation/bloc/account/account_bloc.dart';
 import 'package:groceries_app/presentation/bloc/account/account_event.dart';
 import 'package:groceries_app/presentation/bloc/account/account_state.dart';
 import 'package:groceries_app/presentation/error/failure_mapper.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -15,7 +17,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          AccountBloc(FailureMapper())..add(OnGetUserInfoAccountEvent()),
+          AccountBloc(FailureMapper(context))..add(OnGetUserInfoAccountEvent()),
       child: AccountView(),
     );
   }
@@ -109,7 +111,9 @@ class AccountView extends StatelessWidget {
                 // borderColor: AppColorSchemes.green, // Removed because AppButton does not support this parameter
                 backgroundColor: AppColorSchemes.greyLight,
                 width: (364 / 414) * context.screenWidth,
-                onTap: () {},
+                onTap: () {
+                  context.go(RouteName.loginPath);
+                },
               ),
             ],
           ),
