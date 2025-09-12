@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -40,14 +41,48 @@ class CartSettingItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            imagePath,
-            width: width ?? 50,
-            height: height ?? 60,
-            fit: BoxFit.cover,
+          // image item
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: imagePath.startsWith('http')
+                ? CachedNetworkImage(
+                    imageUrl: imagePath,
+                    width: width ?? 70,
+                    height: height ?? 70,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      width: width ?? 70,
+                      height: height ?? 70,
+                      color: AppColorSchemes.grey.withAlpha(20),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColorSchemes.green,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: width ?? 70,
+                      height: height ?? 70,
+                      color: AppColorSchemes.grey.withAlpha(20),
+                      child: Icon(
+                        Icons.image_not_supported,
+                        color: AppColorSchemes.grey,
+                        size: 30,
+                      ),
+                    ),
+                  )
+                : Image.asset(
+                    imagePath,
+                    width: width ?? 70,
+                    height: height ?? 70,
+                    fit: BoxFit.cover,
+                  ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 32),
+          // info item and quantity controls
           Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,6 +92,8 @@ class CartSettingItemWidget extends StatelessWidget {
                   style: AppTypography.textFont16W600.copyWith(
                     color: AppColorSchemes.black,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -64,9 +101,13 @@ class CartSettingItemWidget extends StatelessWidget {
                   style: AppTypography.textFont14W500.copyWith(
                     color: AppColorSchemes.grey,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
+                // Điều chỉnh số lượng
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     InkWell(
                       onTap: onRemove,
@@ -109,22 +150,31 @@ class CartSettingItemWidget extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: Icon(Icons.close, color: AppColorSchemes.grey),
-                onPressed: onDelete,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                price,
-                style: AppTypography.textFont16W500.copyWith(
-                  color: AppColorSchemes.black,
+          // Giá và nút xóa
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.close, color: AppColorSchemes.grey),
+                  onPressed: onDelete,
+                  constraints: const BoxConstraints(),
+                  padding: EdgeInsets.zero,
                 ),
-              ),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  price,
+                  style: AppTypography.textFont16W500.copyWith(
+                    color: AppColorSchemes.black,
+                  ),
+                  textAlign: TextAlign.right,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ],
       ),

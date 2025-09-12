@@ -71,8 +71,8 @@ class FavoriteView extends StatelessWidget {
                               state.listOfFavoriteItemEntity!.items[index];
                           return FavoriteSettingItemWidget(
                             imagePath: item.thumbnail,
-                            width: 31.w,
-                            height: 55.h,
+                            width: 70.w,
+                            height: 70.h,
                             title: item.title,
                             subtitle: '1 Item',
                             price: item.price.toString(),

@@ -43,11 +43,11 @@ class FavoriteSettingItemWidget extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: imagePath,
-              width: width ?? 50,
-              height: height ?? 60,
+              width: width ?? 70,
+              height: height ?? 70,
               fit: BoxFit.cover,
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 32),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
