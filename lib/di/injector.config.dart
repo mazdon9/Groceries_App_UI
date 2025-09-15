@@ -37,6 +37,8 @@ import 'package:groceries_app/domain/repositories/product_repository.dart'
 import 'package:groceries_app/domain/usecase/delete_a_product_in_cart_usecase.dart'
     as _i521;
 import 'package:groceries_app/domain/usecase/delete_cart_usecase.dart' as _i192;
+import 'package:groceries_app/domain/usecase/get_all_products_usecase.dart'
+    as _i1007;
 import 'package:groceries_app/domain/usecase/get_cart_items_usecase.dart'
     as _i124;
 import 'package:groceries_app/domain/usecase/get_favorite_products_usecase.dart'
@@ -124,6 +126,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i345.AuthRepository>(
       () => _i774.AuthRepositoryImpl(gh<_i138.ApiService>()),
+    );
+    gh.factory<_i1007.GetAllProductsUsecase>(
+      () => _i1007.GetAllProductsUsecase(gh<_i85.IProductRepository>()),
     );
     gh.lazySingleton<_i909.CartRepository>(
       () => _i353.CartRepositoryImpl(gh<_i138.ApiService>()),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -24,7 +25,7 @@ class ShopProductCardWidget extends StatelessWidget {
       width: 173,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColorSchemes.grey.withOpacity(0.3)),
+        border: Border.all(color: AppColorSchemes.grey.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
@@ -34,8 +35,8 @@ class ShopProductCardWidget extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Center(
-              child: Image.asset(
-                imagePath,
+              child: CachedNetworkImage(
+                imageUrl: imagePath,
                 height: 80,
                 width: 80,
                 fit: BoxFit.contain,

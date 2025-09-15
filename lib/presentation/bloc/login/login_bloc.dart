@@ -31,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         LoginSchema(
           username: event.username,
           password: event.password,
-          expiresInMins: 10,
+          expiresInMins: 30,
         ),
       );
       await result.fold(

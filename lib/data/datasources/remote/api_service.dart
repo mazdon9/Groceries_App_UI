@@ -4,6 +4,7 @@ import 'package:groceries_app/data/models/requests/update_a_cart_schema.dart';
 import 'package:groceries_app/data/models/responses/cart_dto.dart';
 import 'package:groceries_app/data/models/responses/favorite_product_dto.dart';
 import 'package:groceries_app/data/models/responses/login_dto.dart';
+import 'package:groceries_app/data/models/responses/product_dto.dart';
 import 'package:groceries_app/data/models/responses/user_info_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -40,4 +41,7 @@ abstract class ApiService {
 
   @DELETE('/products/{id}')
   Future<void> deleteAProductInCart(@Path('id') int id);
+
+  @GET('/products')
+  Future<ProductResponseDto> getAllProducts();
 }

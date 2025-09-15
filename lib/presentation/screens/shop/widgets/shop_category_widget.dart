@@ -14,13 +14,13 @@ class ShopCategoryWidget extends StatelessWidget {
         children: [
           _buildCategoryItem(
             'Pulses',
-            Colors.orange.withOpacity(0.15),
+            Colors.orange.withValues(alpha: 0.15),
             Colors.orange,
           ),
           const SizedBox(width: 16),
           _buildCategoryItem(
             'Rice',
-            AppColorSchemes.green.withOpacity(0.15),
+            AppColorSchemes.green.withValues(alpha: 0.15),
             AppColorSchemes.green,
           ),
         ],

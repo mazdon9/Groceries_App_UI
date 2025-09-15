@@ -137,6 +137,10 @@ class $AssetsImagesGen {
   AssetGenImage get backgroundOnboardingImages =>
       const AssetGenImage('assets/images/background_onboarding_images.png');
 
+  /// File path: assets/images/banner_images.png
+  AssetGenImage get bannerImages =>
+      const AssetGenImage('assets/images/banner_images.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -153,6 +157,7 @@ class $AssetsImagesGen {
     avatarImages,
     backgoundOnboardingImage,
     backgroundOnboardingImages,
+    bannerImages,
     logo,
     logoOrange,
     logoText,
