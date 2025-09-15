@@ -33,6 +33,7 @@ class AppImagesPath {
   static const String pepsiCanCart = 'assets/images_cart/pepsi_can_images.png';
   static const String spirteCanCart =
       'assets/images_cart/spirte_can_images.png';
+  static const String bannerImages = 'assets/images/banner_images.png';
 }
 
 class AppIconPath {

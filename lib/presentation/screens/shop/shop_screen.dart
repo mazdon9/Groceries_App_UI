@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/core/contants/app_images_path.dart';
+import 'package:groceries_app/presentation/screens/shop/widgets/shop_banner_widget.dart';
+import 'package:groceries_app/presentation/screens/shop/widgets/shop_category_widget.dart';
+import 'package:groceries_app/presentation/screens/shop/widgets/shop_product_card_widget.dart';
+import 'package:groceries_app/presentation/screens/shop/widgets/shop_section_header_widget.dart';
+import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
+import 'package:groceries_app/presentation/theme/app_typography.dart';
 
 class ShopScreen extends StatelessWidget {
   const ShopScreen({super.key});
@@ -6,8 +13,187 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Shop')),
-      body: Center(child: Text('Shop Screen')),
+      backgroundColor: AppColorSchemes.white,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          children: [
+            const SizedBox(height: 20),
+            // Header with logo
+            Center(
+              child: Image.asset(
+                AppImagesPath.logoOrange,
+                height: 26,
+                width: 26,
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Location
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.location_on_outlined,
+                  size: 16,
+                  color: AppColorSchemes.grey,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  'Dhaka, Banasree',
+                  style: AppTypography.textFont18W600.copyWith(
+                    color: AppColorSchemes.grey,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            // Search bar
+            Container(
+              height: 51,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: AppColorSchemes.grey.withAlpha(38),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, size: 20, color: AppColorSchemes.grey),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search Store',
+                        hintStyle: AppTypography.textFont14W500.copyWith(
+                          color: AppColorSchemes.grey,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      enabled: false, // Logic để trống
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Banner
+            const ShopBannerWidget(),
+            const SizedBox(height: 30),
+            // Exclusive Offer Section
+            ShopSectionHeaderWidget(
+              title: 'Exclusive Offer',
+              onSeeAll: () {
+                // Logic để trống
+              },
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 230,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(right: 25),
+                children: [
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.organicBannanasCart,
+                    title: 'Organic Bananas',
+                    subtitle: '7pcs, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                  const SizedBox(width: 15),
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.appleAndGrapeJuiceCart,
+                    title: 'Red Apple',
+                    subtitle: '1kg, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            // Best Selling Section
+            ShopSectionHeaderWidget(
+              title: 'Best Selling',
+              onSeeAll: () {
+                // Logic để trống
+              },
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 230,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(right: 25),
+                children: [
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.bellPepperRedCart,
+                    title: 'Bell Pepper Red',
+                    subtitle: '1kg, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                  const SizedBox(width: 15),
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.gingerCart,
+                    title: 'Ginger',
+                    subtitle: '250gm, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            // Groceries Section
+            ShopSectionHeaderWidget(
+              title: 'Groceries',
+              onSeeAll: () {
+                // Logic để trống
+              },
+            ),
+            const SizedBox(height: 20),
+            const ShopCategoryWidget(),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 230,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(right: 25),
+                children: [
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.eggChickenRedCart,
+                    title: 'Beef Bone',
+                    subtitle: '1kg, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                  const SizedBox(width: 15),
+                  ShopProductCardWidget(
+                    imagePath: AppImagesPath.eggChickenWhiteCart,
+                    title: 'Broiler Chicken',
+                    subtitle: '1kg, Priceg',
+                    price: '\$4.99',
+                    onAddToCart: () {
+                      // Logic để trống
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+          ],
+        ),
+      ),
     );
   }
 }
