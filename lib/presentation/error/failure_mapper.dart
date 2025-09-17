@@ -37,7 +37,9 @@ class FailureMapper {
   Future<void> _navigateToLoginScreen() async {
     await getIt<LocalStorage>().setAccessToken('');
     WidgetsBinding.instance.addPersistentFrameCallback((_) {
-      context.go(RouteName.loginPath);
+      if (context.mounted) {
+        context.go(RouteName.loginPath);
+      }
     });
   }
 }

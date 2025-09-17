@@ -2,26 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
-class ProductDetailExpandableWidget extends StatefulWidget {
+class ProductDetailExpandableWidget extends StatelessWidget {
   final String title;
   final String content;
   final Widget? trailing;
+  final bool isExpanded;
+  final VoidCallback? onToggle;
 
   const ProductDetailExpandableWidget({
     super.key,
     required this.title,
     required this.content,
     this.trailing,
+    required this.isExpanded,
+    this.onToggle,
   });
-
-  @override
-  State<ProductDetailExpandableWidget> createState() =>
-      _ProductDetailExpandableWidgetState();
-}
-
-class _ProductDetailExpandableWidgetState
-    extends State<ProductDetailExpandableWidget> {
-  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +24,28 @@ class _ProductDetailExpandableWidgetState
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
         children: [
-          // Divider
           Container(height: 1, color: AppColorSchemes.grey.withAlpha(77)),
           const SizedBox(height: 16),
-          // Header Row
           GestureDetector(
-            onTap: () {
-              setState(() {
-                _isExpanded = !_isExpanded;
-              });
-            },
+            onTap: onToggle,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.title,
+                  title,
                   style: AppTypography.textFont16W600.copyWith(
                     color: AppColorSchemes.black,
                   ),
                 ),
                 Row(
                   children: [
-                    if (widget.trailing != null) ...[
-                      widget.trailing!,
+                    if (trailing != null) ...[
+                      trailing!,
                       const SizedBox(width: 12),
                     ],
                     AnimatedRotation(
                       duration: const Duration(milliseconds: 200),
-                      turns: _isExpanded ? 0.5 : 0,
+                      turns: isExpanded ? 0.5 : 0,
                       child: Icon(
                         Icons.keyboard_arrow_down,
                         color: AppColorSchemes.black,
@@ -69,16 +58,15 @@ class _ProductDetailExpandableWidgetState
             ),
           ),
           const SizedBox(height: 16),
-          // Expandable Content
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            height: _isExpanded ? null : 0,
-            child: _isExpanded
+            height: isExpanded ? null : 0,
+            child: isExpanded
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.content,
+                        content,
                         style: AppTypography.textFont14W500.copyWith(
                           color: AppColorSchemes.grey,
                           height: 1.5,
@@ -96,20 +84,35 @@ class _ProductDetailExpandableWidgetState
 }
 
 class ProductDetailSectionsWidget extends StatelessWidget {
-  const ProductDetailSectionsWidget({super.key});
+  final bool productDetailExpanded;
+  final bool nutritionsExpanded;
+  final bool reviewExpanded;
+  final VoidCallback onProductDetailToggle;
+  final VoidCallback onNutritionsToggle;
+  final VoidCallback onReviewToggle;
+
+  const ProductDetailSectionsWidget({
+    super.key,
+    required this.productDetailExpanded,
+    required this.nutritionsExpanded,
+    required this.reviewExpanded,
+    required this.onProductDetailToggle,
+    required this.onNutritionsToggle,
+    required this.onReviewToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 30),
-        // Product Detail Section
         ProductDetailExpandableWidget(
           title: 'Product Detail',
           content:
               'Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.',
+          isExpanded: productDetailExpanded,
+          onToggle: onProductDetailToggle,
         ),
-        // Nutritions Section
         ProductDetailExpandableWidget(
           title: 'Nutritions',
           content:
@@ -127,8 +130,9 @@ class ProductDetailSectionsWidget extends StatelessWidget {
               ),
             ),
           ),
+          isExpanded: nutritionsExpanded,
+          onToggle: onNutritionsToggle,
         ),
-        // Review Section
         ProductDetailExpandableWidget(
           title: 'Review',
           content:
@@ -141,6 +145,8 @@ class ProductDetailSectionsWidget extends StatelessWidget {
               }),
             ],
           ),
+          isExpanded: reviewExpanded,
+          onToggle: onReviewToggle,
         ),
         const SizedBox(height: 30),
       ],
