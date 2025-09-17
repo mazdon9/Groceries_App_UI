@@ -146,6 +146,7 @@ class _ShopViewState extends State<ShopView> {
                                 itemBuilder: (context, index) {
                                   final product = item.products[index];
                                   return ShopProductCardWidget(
+                                    product: product,
                                     imagePath: product.thumbnail,
                                     title: product.title,
                                     subtitle: product.weight.toString(),
