@@ -5,4 +5,6 @@ abstract class IProductRepository {
   ResultFuture<void> deleteAProductInCart(int id);
 
   ResultFuture<ListOfCategoryProductsEntity> getShopProducts();
+
+  ResultFuture<ProductsByCategoryEntity> getProductsByCategory(String category);
 }

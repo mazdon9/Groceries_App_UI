@@ -20,7 +20,6 @@ class ProductDetailImageWidget extends StatefulWidget {
 }
 
 class _ProductDetailImageWidgetState extends State<ProductDetailImageWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

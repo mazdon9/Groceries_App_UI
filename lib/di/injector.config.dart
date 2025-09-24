@@ -24,6 +24,8 @@ import 'package:groceries_app/data/repositories/auth_repository_impl.dart'
     as _i774;
 import 'package:groceries_app/data/repositories/cart_repository_impl.dart'
     as _i353;
+import 'package:groceries_app/data/repositories/category_repository_impl.dart'
+    as _i619;
 import 'package:groceries_app/data/repositories/product_repository_impl.dart'
     as _i1032;
 import 'package:groceries_app/di/env_module.dart' as _i116;
@@ -32,6 +34,8 @@ import 'package:groceries_app/domain/repositories/auth_repository.dart'
     as _i345;
 import 'package:groceries_app/domain/repositories/cart_repository.dart'
     as _i909;
+import 'package:groceries_app/domain/repositories/category_repository.dart'
+    as _i172;
 import 'package:groceries_app/domain/repositories/product_repository.dart'
     as _i85;
 import 'package:groceries_app/domain/usecase/delete_a_product_in_cart_usecase.dart'
@@ -47,6 +51,10 @@ import 'package:groceries_app/domain/usecase/get_info_usecase.dart' as _i84;
 import 'package:groceries_app/domain/usecase/login_usecase.dart' as _i304;
 import 'package:groceries_app/domain/usecase/update_cart_item_quantity_usecase.dart'
     as _i535;
+import 'package:groceries_app/presentation/bloc/category/category_bloc.dart'
+    as _i212;
+import 'package:groceries_app/presentation/bloc/explore/explore_bloc.dart'
+    as _i818;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -121,8 +129,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i85.IProductRepository>(
       () => _i1032.ProductRepositoryImpl(gh<_i138.ApiService>()),
     );
+    gh.lazySingleton<_i172.CategoryRepository>(
+      () => _i619.CategoryRepositoryImpl(gh<_i138.ApiService>()),
+    );
     gh.factory<_i521.DeleteAProductInCartUsecase>(
       () => _i521.DeleteAProductInCartUsecase(gh<_i85.IProductRepository>()),
+    );
+    gh.factory<_i818.ExploreBloc>(
+      () => _i818.ExploreBloc(gh<_i172.CategoryRepository>()),
     );
     gh.lazySingleton<_i345.AuthRepository>(
       () => _i774.AuthRepositoryImpl(gh<_i138.ApiService>()),
@@ -130,26 +144,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1007.GetAllProductsUsecase>(
       () => _i1007.GetAllProductsUsecase(gh<_i85.IProductRepository>()),
     );
+    gh.factory<_i212.CategoryBloc>(
+      () => _i212.CategoryBloc(gh<_i85.IProductRepository>()),
+    );
     gh.lazySingleton<_i909.CartRepository>(
       () => _i353.CartRepositoryImpl(gh<_i138.ApiService>()),
-    );
-    gh.factory<_i304.LoginUsecase>(
-      () => _i304.LoginUsecase(gh<_i345.AuthRepository>()),
     );
     gh.factory<_i84.GetInfoUsecase>(
       () => _i84.GetInfoUsecase(gh<_i345.AuthRepository>()),
     );
-    gh.factory<_i368.GetFavoriteProductsUsecase>(
-      () => _i368.GetFavoriteProductsUsecase(gh<_i909.CartRepository>()),
+    gh.factory<_i304.LoginUsecase>(
+      () => _i304.LoginUsecase(gh<_i345.AuthRepository>()),
     );
     gh.factory<_i192.DeleteCartUsecase>(
       () => _i192.DeleteCartUsecase(gh<_i909.CartRepository>()),
     );
-    gh.factory<_i535.UpdateCartItemQuantityUsecase>(
-      () => _i535.UpdateCartItemQuantityUsecase(gh<_i909.CartRepository>()),
-    );
     gh.factory<_i124.GetCartItemsUsecase>(
       () => _i124.GetCartItemsUsecase(gh<_i909.CartRepository>()),
+    );
+    gh.factory<_i368.GetFavoriteProductsUsecase>(
+      () => _i368.GetFavoriteProductsUsecase(gh<_i909.CartRepository>()),
+    );
+    gh.factory<_i535.UpdateCartItemQuantityUsecase>(
+      () => _i535.UpdateCartItemQuantityUsecase(gh<_i909.CartRepository>()),
     );
     return this;
   }

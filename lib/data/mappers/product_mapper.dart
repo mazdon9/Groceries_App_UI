@@ -45,4 +45,20 @@ extension ProductResponseMapper on ProductResponseDto {
       listOfCategoryProductsEntity: listOfCategoryProducts,
     );
   }
+
+  /// Map products by category response -> ProductsByCategoryEntity
+  ProductsByCategoryEntity toByCategoryEntity() {
+    final productList = products ?? [];
+
+    final productEntities = productList
+        .map((product) => product.toEntity())
+        .toList();
+
+    return ProductsByCategoryEntity(
+      products: productEntities,
+      total: total ?? 0,
+      skip: skip ?? 0,
+      limit: limit ?? 0,
+    );
+  }
 }

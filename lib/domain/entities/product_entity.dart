@@ -42,3 +42,20 @@ class ListOfCategoryProductsEntity extends Equatable {
   @override
   List<Object?> get props => [listOfCategoryProductsEntity];
 }
+
+class ProductsByCategoryEntity extends Equatable {
+  final List<ProductDetailEntity> products;
+  final int total;
+  final int skip;
+  final int limit;
+
+  const ProductsByCategoryEntity({
+    required this.products,
+    required this.total,
+    required this.skip,
+    required this.limit,
+  });
+
+  @override
+  List<Object?> get props => [products, total, skip, limit];
+}
