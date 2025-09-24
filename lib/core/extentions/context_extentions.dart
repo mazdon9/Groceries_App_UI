@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groceries_app/l10n/app_localizations.dart';
 
 /// context extensions based on BuildContext
 extension ContextExtension on BuildContext {
@@ -19,4 +20,7 @@ extension ContextExtension on BuildContext {
 
   /// ColorScheme surface
   Color get surfaceColor => colorScheme.surface;
+
+  /// get appLocalizations
+  AppLocalizations get appLocalizations => AppLocalizations.of(this);
 }

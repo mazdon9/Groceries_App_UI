@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:groceries_app/presentation/shared/app_text.dart';
-import 'package:groceries_app/core/extentions/context_extentions.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -8,12 +8,22 @@ class AppButton extends StatelessWidget {
   final String content;
   final VoidCallback onTap;
   final double width;
+  final Color? backgroundColor;
+  final TextStyle? textStyle;
+  final Border? borderColors;
+  final String? iconPath;
+  final Widget? trailing;
 
   const AppButton({
     required this.content,
     required this.onTap,
     this.width = double.infinity,
+    this.backgroundColor,
     super.key,
+    this.textStyle,
+    this.borderColors,
+    this.iconPath,
+    this.trailing,
   });
 
   @override
@@ -22,19 +32,37 @@ class AppButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width,
-        height: (67 / 896) * context.screenHeight,
+        // height: 67.h,
         decoration: BoxDecoration(
-          color: AppColorSchemes.green,
-          borderRadius: BorderRadius.circular(59),
+          border: borderColors,
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(20.r),
         ),
-        child: Center(
-          child: AppText(
-            title: content,
-            style: AppTypography.textFont18W600.copyWith(
-              color: AppColorSchemes.white,
-              fontSize: 17.6,
+        padding: EdgeInsets.symmetric(vertical: 22.5.h, horizontal: 24.w),
+        child: Row(
+          children: [
+            if (iconPath != null)
+              Image.asset(
+                iconPath!,
+                color: AppColorSchemes.green,
+                width: 24.w,
+                height: 24.w,
+              ),
+            Expanded(
+              child: AppText(
+                title: content,
+                textAlign: TextAlign.center,
+                style:
+                    textStyle ??
+                    AppTypography.textFont18W600.copyWith(
+                      color: backgroundColor == null
+                          ? AppColorSchemes.white
+                          : AppColorSchemes.green,
+                    ),
+              ),
             ),
-          ),
+            if (trailing != null) ...[SizedBox(width: 12.w), trailing!],
+          ],
         ),
       ),
     );

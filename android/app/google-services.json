@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "357795177253",
+    "project_id": "online-groceries-dac5d",
+    "storage_bucket": "online-groceries-dac5d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357795177253:android:523d3d6deafd6dc5bb30cc",
+        "android_client_info": {
+          "package_name": "com.groceries_app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwUTbVkopXfgpXVXfj6242WGv2X68Ysys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

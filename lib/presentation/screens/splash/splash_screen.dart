@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/presentation/shared/app_text.dart';
+import 'package:go_router/go_router.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/data/datasources/local/local_storage.dart';
+import 'package:groceries_app/di/injector.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -12,11 +16,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final localStorage = getIt<LocalStorage>();
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, 'onboarding-screen');
+    Future.delayed(const Duration(seconds: 2), () async {
+      // Make sure LocalStorage is initialized
+      final completed = await localStorage.getOnboardingCompleted();
+      final accessToken = await localStorage.getAccessToken();
+      if (mounted) {
+        if (completed) {
+          if (accessToken != null && accessToken.isNotEmpty) {
+            context.go(RouteName.dashboardPath);
+          } else {
+            context.go(RouteName.loginPath);
+          }
+        } else {
+          context.go(RouteName.onboardingPath);
+        }
+      }
     });
   }
 

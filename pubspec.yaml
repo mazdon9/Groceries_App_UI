@@ -43,6 +43,7 @@ dependencies:
   #UI
   flutter_screenutil: ^5.9.3
   cached_network_image: ^3.4.1
+  flutter_svg: ^2.1.0
 
   #Architecture
   flutter_bloc: ^9.0.0
@@ -81,6 +82,12 @@ dev_dependencies:
   freezed: ^2.5.8
   flutter_gen_runner: ^5.11.0
 
+flutter_gen:
+  output: lib/core/assets_gen/ # Optional (default: lib/gen/)
+  line_length: 80
+  integrations:
+    flutter_svg: true
+
 flutter:
   uses-material-design: true
   generate: true
@@ -88,6 +95,8 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/icons/
+    - assets/images_cart/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

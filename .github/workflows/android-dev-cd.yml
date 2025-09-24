@@ -1,0 +1,72 @@
+name: Android Dev CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Java (Gradle cần JDK 17 hoặc 21 cho Flutter 3.22+)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 3. Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.8" # hoặc version bạn đang dùng
+
+      # 4. Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5. Code generation (build_runner)
+      - name: Run code generation
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # 6. Dart format
+      - name: Check code formatting
+        run: dart format --set-exit-if-changed .
+
+      # 7. Flutter analyze
+      - name: Run analyzer
+        run: flutter analyze
+
+      # 8. Build APK (dev flavor)
+      - name: Build APK (dev flavor)
+        run: flutter build apk --release --flavor dev -t lib/main_dev.dart
+
+      # 9. Setup Ruby & Fastlane
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2" # stable version
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: gem install fastlane -NV
+
+      # 10. Setup Google credentials file from secret
+      - name: Create Firebase credentials file
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $RUNNER_TEMP/firebase.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase.json" >> $GITHUB_ENV
+
+      # 11. Run Fastlane Distribution
+      - name: Distribute to Firebase
+        env:
+          FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
+        run: fastlane android distribute_android_dev_app_via_firebase

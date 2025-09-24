@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/presentation/shared/app_button.dart';
-import 'package:groceries_app/presentation/shared/app_text.dart';
+import 'package:go_router/go_router.dart';
+import 'package:groceries_app/core/assets_gen/assets.gen.dart';
 import 'package:groceries_app/core/contants/app_images_path.dart';
 import 'package:groceries_app/core/extentions/context_extentions.dart';
+import 'package:groceries_app/data/datasources/local/local_storage.dart';
+import 'package:groceries_app/di/injector.dart';
+import 'package:groceries_app/presentation/shared/app_button.dart';
+import 'package:groceries_app/presentation/shared/app_text.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
@@ -17,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/backgound_onboarding_image.png',
+              Assets.images.backgoundOnboardingImage.path,
               fit: BoxFit.cover,
             ),
           ),
@@ -46,7 +50,13 @@ class OnboardingScreen extends StatelessWidget {
                   content: 'Get Started',
                   width: (353 / 414) * context.screenWidth,
 
-                  onTap: () {},
+                  onTap: () async {
+                    // Lưu trạng thái onboarding đã hoàn thành
+                    await getIt<LocalStorage>().setOnboardingCompleted();
+                    if (context.mounted) {
+                      context.go('/login');
+                    }
+                  },
                 ),
               ),
               const SizedBox(height: 48),
