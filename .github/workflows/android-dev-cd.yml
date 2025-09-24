@@ -55,18 +55,17 @@ jobs:
           ruby-version: "3.2" # stable version
           bundler-cache: true
 
-      - name: Install Fastlane
-        run: gem install fastlane -NV
-
-      # 10. Setup Google credentials file from secret
-      - name: Create Firebase credentials file
+      - name: Install fastlane
+        working-directory: android
         run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $RUNNER_TEMP/firebase.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase.json" >> $GITHUB_ENV
-
-      # 11. Run Fastlane Distribution
-      - name: Distribute to Firebase
+          bundle install
+          bundle exec fastlane --version
+      - name: Setup Firebase credentials
+        run: |
+          echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > $RUNNER_TEMP/fad.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/fad.json" >> $GITHUB_ENV
+      - name: Distribute android app dev to firebase distribution
+        working-directory: ./android
+        run: bundle exec fastlane distribute_android_dev_app_via_firebase
         env:
           FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
-        run: fastlane android distribute_android_dev_app_via_firebase
