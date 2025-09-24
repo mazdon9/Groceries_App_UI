@@ -1,51 +1,51 @@
-name: Android Dev CI
+# name: Android Dev CI
 
-on:
-  pull_request:
-    branches:
-      - main
-      - develop
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - develop
 
-jobs:
-  build-android:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-android:
+#     runs-on: ubuntu-latest
 
-    steps:
-      # 1. Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#     steps:
+#       # 1. Checkout repository
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      # 2. Setup Java (Gradle cần JDK 17 hoặc 21 cho Flutter 3.22+)
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
+#       # 2. Setup Java (Gradle cần JDK 17 hoặc 21 cho Flutter 3.22+)
+#       - name: Setup Java
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: temurin
+#           java-version: 17
 
-      # 3. Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.32.8" # hoặc version bạn đang dùng
+#       # 3. Setup Flutter
+#       - name: Setup Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: "3.32.8" # hoặc version bạn đang dùng
 
-      # 4. Install dependencies
-      - name: Install dependencies
-        run: flutter pub get
+#       # 4. Install dependencies
+#       - name: Install dependencies
+#         run: flutter pub get
 
-      # 5. Code generation (build_runner)
-      - name: Run code generation
-        run: dart run build_runner build --delete-conflicting-outputs
+#       # 5. Code generation (build_runner)
+#       - name: Run code generation
+#         run: dart run build_runner build --delete-conflicting-outputs
 
-      # 6. Dart format
-      - name: Check code formatting
-        run: dart format --set-exit-if-changed .
+#       # 6. Dart format
+#       - name: Check code formatting
+#         run: dart format --set-exit-if-changed .
 
-      # 7. Flutter analyze
-      - name: Run analyzer
-        run: flutter analyze
+#       # 7. Flutter analyze
+#       - name: Run analyzer
+#         run: flutter analyze
 
-      # 8. Build APK (dev flavor)
-      - name: Build APK (dev flavor)
-        run: flutter build apk --release --flavor dev -t lib/main_dev.dart
+#       # 8. Build APK (dev flavor)
+#       - name: Build APK (dev flavor)
+#         run: flutter build apk --release --flavor dev -t lib/main_dev.dart
 
-      # 9. Test cases
+#       # 9. Test cases
