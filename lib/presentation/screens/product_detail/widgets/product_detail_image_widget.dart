@@ -20,13 +20,6 @@ class ProductDetailImageWidget extends StatefulWidget {
 }
 
 class _ProductDetailImageWidgetState extends State<ProductDetailImageWidget> {
-  late bool _isFavorite;
-
-  @override
-  void initState() {
-    super.initState();
-    _isFavorite = widget.isFavorite;
-  }
 
   @override
   Widget build(BuildContext context) {
