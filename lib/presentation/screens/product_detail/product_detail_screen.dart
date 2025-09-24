@@ -117,7 +117,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             Expanded(
                               child: Text(
                                 widget.product.title,
-                                style: AppTypography.textFont26W600.copyWith(
+                                style: AppTypography.textFont18W600.copyWith(
                                   color: AppColorSchemes.black,
                                 ),
                               ),
