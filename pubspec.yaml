@@ -70,6 +70,12 @@ dependencies:
   #Routing
   go_router: ^15.0.0
 
+  #Deeplink
+  chottu_link: ^1.0.14
+
+  #Share
+  share_plus: ^11.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

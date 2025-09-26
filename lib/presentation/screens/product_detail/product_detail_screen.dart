@@ -1,9 +1,14 @@
+import 'package:chottu_link/chottu_link.dart';
+import 'package:chottu_link/dynamic_link/cl_dynamic_link_behaviour.dart';
+import 'package:chottu_link/dynamic_link/cl_dynamic_link_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:groceries_app/presentation/bloc/detail/detail_bloc.dart';
 import 'package:groceries_app/presentation/bloc/detail/detail_event.dart';
 import 'package:groceries_app/presentation/bloc/detail/detail_state.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
 import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_expandable_widget.dart';
 import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_image_slider_widget.dart';
 import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_quantity_widget.dart';
@@ -11,11 +16,17 @@ import 'package:groceries_app/presentation/shared/app_button.dart';
 import 'package:groceries_app/presentation/shared/common_dialogs.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final int productId;
+  final bool isFromDeepLink;
 
-  const ProductDetailScreen({super.key, required this.productId});
+  const ProductDetailScreen({
+    super.key,
+    required this.productId,
+    this.isFromDeepLink = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +34,23 @@ class ProductDetailScreen extends StatelessWidget {
       create: (context) =>
           GetIt.instance<DetailBloc>()
             ..add(OnLoadProductDetailEvent(productId)),
-      child: const ProductDetailView(),
+      child: ProductDetailView(
+        isFromDeepLink: isFromDeepLink,
+        productId: productId,
+      ),
     );
   }
 }
 
 class ProductDetailView extends StatefulWidget {
-  const ProductDetailView({super.key});
+  const ProductDetailView({
+    super.key,
+    required this.isFromDeepLink,
+    required this.productId,
+  });
+
+  final bool isFromDeepLink;
+  final int productId;
 
   @override
   State<ProductDetailView> createState() => _ProductDetailViewState();
@@ -78,7 +99,13 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.pop(context),
+                          onTap: () {
+                            if (widget.isFromDeepLink) {
+                              context.go(RouteName.dashboardPath);
+                            } else {
+                              context.pop();
+                            }
+                          },
                           child: Container(
                             margin: const EdgeInsets.all(8),
                             width: 44,
@@ -104,14 +131,15 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Share functionality will be implemented later',
-                                ),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   const SnackBar(
+                            //     content: Text(
+                            //       'Share functionality will be implemented later',
+                            //     ),
+                            //     duration: Duration(seconds: 2),
+                            //   ),
+                            // );
+                            _buildShareFunction();
                           },
                           child: Container(
                             margin: const EdgeInsets.all(8),
@@ -317,6 +345,55 @@ class _ProductDetailViewState extends State<ProductDetailView> {
           },
         ),
       ),
+    );
+  }
+
+  void _buildShareFunction() {
+    /// Create dynamic link parameters
+    final parameters = CLDynamicLinkParameters(
+      link: Uri.parse(
+        "https://onlinegrocerystore.chottu.link/product/${widget.productId}",
+      ), // Target deep link
+      domain: "onlinegrocerystore.chottu.link", // Your ChottuLink domain
+      // Set behavior for Android & iOS
+      androidBehaviour: CLDynamicLinkBehaviour.app,
+      iosBehaviour: CLDynamicLinkBehaviour.app,
+
+      // // UTM Tracking (for analytics)
+      // utmCampaign: "exampleCampaign",
+      // utmMedium: "exampleMedium",
+      // utmSource: "exampleSource",
+      // utmContent: "exampleContent",
+      // utmTerm: "exampleTerm",
+
+      // // Optional metadata
+      // linkName: "linkname",
+      // selectedPath: "customPath",
+      // socialTitle: "Social Title",
+      // socialDescription: "Description to show when shared",
+      // socialImageUrl:
+      //     "https://yourdomain.com/image.png", // Must be a valid image URL
+    );
+
+    ChottuLink.createDynamicLink(
+      parameters: parameters,
+      onSuccess: (link) {
+        debugPrint("✅ Shared Link: $link"); // 🔗 Successfully created link
+        SharePlus.instance.share(
+          ShareParams(title: 'Please check this Product', uri: Uri.parse(link)),
+        );
+      },
+      onError: (error) {
+        debugPrint("❌ Error creating link: ${error.description}");
+        SharePlus.instance.share(
+          ShareParams(
+            title: 'Please check this Product',
+            uri: Uri.parse(
+              "https://onlinegrocerystore.chottu.link/product/${widget.productId}",
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -22,4 +22,5 @@ class RouteName {
   static const String cartName = 'cart';
   static const String shopName = 'shop';
   static const String exploreName = 'explore';
+  static const String productDetailName = '/product_detail';
 }

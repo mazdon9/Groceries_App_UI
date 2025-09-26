@@ -7,6 +7,7 @@ import 'package:groceries_app/presentation/screens/explore/explore_screen.dart';
 import 'package:groceries_app/presentation/screens/favorite/favorite_screen.dart';
 import 'package:groceries_app/presentation/screens/login/login_screen.dart';
 import 'package:groceries_app/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:groceries_app/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:groceries_app/presentation/screens/shop/shop_screen.dart';
 import 'package:groceries_app/presentation/screens/sign_up/sign_up_screen.dart';
 import 'package:groceries_app/presentation/screens/splash/splash_screen.dart';
@@ -63,6 +64,19 @@ final GoRouter appRouter = GoRouter(
       path: RouteName.shopPath,
       name: RouteName.shopName,
       builder: (context, state) => const ShopScreen(),
+    ),
+    GoRoute(
+      path: RouteName.productDetailName,
+      name: RouteName.productDetailName,
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final productId = extra['productId'] as int? ?? 0;
+        final isFromDeepLink = extra['isFromDeepLink'] as bool? ?? false;
+        return ProductDetailScreen(
+          productId: productId,
+          isFromDeepLink: isFromDeepLink,
+        );
+      },
     ),
   ],
 );

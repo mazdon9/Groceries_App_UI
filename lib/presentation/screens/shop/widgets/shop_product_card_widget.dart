@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:groceries_app/domain/entities/product_entity.dart';
+import 'package:groceries_app/presentation/routes/route_name.dart';
 import 'package:groceries_app/presentation/screens/product_detail/product_detail_screen.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
@@ -29,11 +31,9 @@ class ShopProductCardWidget extends StatelessWidget {
       onTap: () {
         // Navigate to Product Detail Screen if product is available
         if (product != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProductDetailScreen(productId: product!.id),
-            ),
+          context.pushNamed(
+            RouteName.productDetailName,
+            extra: {'productId': product!.id, 'isFromDeepLink': false},
           );
         }
       },
