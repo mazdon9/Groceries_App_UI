@@ -96,7 +96,16 @@ class _ProductDetailExpandableWidgetState
 }
 
 class ProductDetailSectionsWidget extends StatelessWidget {
-  const ProductDetailSectionsWidget({super.key});
+  final String? description;
+  final String? nutritionInfo;
+  final List<dynamic>? reviews;
+
+  const ProductDetailSectionsWidget({
+    super.key,
+    this.description,
+    this.nutritionInfo,
+    this.reviews,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +115,12 @@ class ProductDetailSectionsWidget extends StatelessWidget {
         // Product Detail Section
         ProductDetailExpandableWidget(
           title: 'Product Detail',
-          content:
-              'Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.',
+          content: description ?? 'No product description available.',
         ),
         // Nutritions Section
         ProductDetailExpandableWidget(
           title: 'Nutritions',
-          content:
-              'Rich in vitamins, minerals, and dietary fiber. Contains antioxidants and natural sugars. Low in calories and fat-free.',
+          content: nutritionInfo ?? 'Nutrition information not available.',
           trailing: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
@@ -131,19 +138,59 @@ class ProductDetailSectionsWidget extends StatelessWidget {
         // Review Section
         ProductDetailExpandableWidget(
           title: 'Review',
-          content:
-              'Great product! Fresh and delicious. Highly recommended for healthy snacking.',
+          content: _buildReviewContent(),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              ...List.generate(5, (index) {
-                return Icon(Icons.star, color: Colors.orange, size: 16);
-              }),
-            ],
+            children: _buildStarRating(),
           ),
         ),
         const SizedBox(height: 30),
       ],
     );
+  }
+
+  String _buildReviewContent() {
+    if (reviews == null || reviews!.isEmpty) {
+      return 'No reviews available for this product.';
+    }
+
+    final StringBuffer content = StringBuffer();
+    for (int i = 0; i < reviews!.length && i < 3; i++) {
+      final review = reviews![i];
+      content.writeln('⭐ ${review.rating}/5 - ${review.reviewerName}');
+      content.writeln('"${review.comment}"');
+      if (i < reviews!.length - 1 && i < 2) content.writeln();
+    }
+
+    if (reviews!.length > 3) {
+      content.writeln('\n... and ${reviews!.length - 3} more reviews');
+    }
+
+    return content.toString();
+  }
+
+  List<Widget> _buildStarRating() {
+    if (reviews == null || reviews!.isEmpty) {
+      return List.generate(5, (index) {
+        return Icon(Icons.star_border, color: Colors.grey, size: 16);
+      });
+    }
+
+    // Calculate average rating
+    double totalRating = 0;
+    for (final review in reviews!) {
+      totalRating += review.rating;
+    }
+    double averageRating = totalRating / reviews!.length;
+
+    return List.generate(5, (index) {
+      if (index < averageRating.floor()) {
+        return Icon(Icons.star, color: Colors.orange, size: 16);
+      } else if (index < averageRating) {
+        return Icon(Icons.star_half, color: Colors.orange, size: 16);
+      } else {
+        return Icon(Icons.star_border, color: Colors.grey, size: 16);
+      }
+    });
   }
 }

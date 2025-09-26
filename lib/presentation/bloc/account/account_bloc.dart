@@ -42,6 +42,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
+  /// clear error message
   void _onClearAccountErrorMessage(
     OnClearAccountErrorMessage event,
     Emitter<AccountState> emit,

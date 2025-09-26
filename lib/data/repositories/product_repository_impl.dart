@@ -36,4 +36,12 @@ class ProductRepositoryImpl implements IProductRepository {
       return responseDTO.toByCategoryEntity();
     });
   }
+
+  @override
+  ResultFuture<ProductDetailEntity> getProductById(int id) {
+    return guardDio<ProductDetailEntity>(() async {
+      final productDTO = await apiService.getProductById(id);
+      return productDTO.toDetailEntity();
+    });
+  }
 }

@@ -150,7 +150,7 @@ class _ShopViewState extends State<ShopView> {
                                     imagePath: product.thumbnail,
                                     title: product.title,
                                     subtitle: product.weight.toString(),
-                                    price: product.price.toString(),
+                                    price: '\$${product.price.toString()}',
                                     onAddToCart: () {},
                                   );
                                 },

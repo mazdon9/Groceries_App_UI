@@ -53,6 +53,8 @@ import 'package:groceries_app/domain/usecase/update_cart_item_quantity_usecase.d
     as _i535;
 import 'package:groceries_app/presentation/bloc/category/category_bloc.dart'
     as _i212;
+import 'package:groceries_app/presentation/bloc/detail/detail_bloc.dart'
+    as _i311;
 import 'package:groceries_app/presentation/bloc/explore/explore_bloc.dart'
     as _i818;
 import 'package:injectable/injectable.dart' as _i526;
@@ -146,6 +148,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i212.CategoryBloc>(
       () => _i212.CategoryBloc(gh<_i85.IProductRepository>()),
+    );
+    gh.factory<_i311.DetailBloc>(
+      () => _i311.DetailBloc(gh<_i85.IProductRepository>()),
     );
     gh.lazySingleton<_i909.CartRepository>(
       () => _i353.CartRepositoryImpl(gh<_i138.ApiService>()),

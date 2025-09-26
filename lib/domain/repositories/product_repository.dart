@@ -7,4 +7,6 @@ abstract class IProductRepository {
   ResultFuture<ListOfCategoryProductsEntity> getShopProducts();
 
   ResultFuture<ProductsByCategoryEntity> getProductsByCategory(String category);
+
+  ResultFuture<ProductDetailEntity> getProductById(int id);
 }

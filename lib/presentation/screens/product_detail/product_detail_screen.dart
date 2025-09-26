@@ -1,22 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_app/domain/entities/product_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:groceries_app/presentation/bloc/detail/detail_bloc.dart';
+import 'package:groceries_app/presentation/bloc/detail/detail_event.dart';
+import 'package:groceries_app/presentation/bloc/detail/detail_state.dart';
 import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_expandable_widget.dart';
-import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_image_widget.dart';
+import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_image_slider_widget.dart';
 import 'package:groceries_app/presentation/screens/product_detail/widgets/product_detail_quantity_widget.dart';
 import 'package:groceries_app/presentation/shared/app_button.dart';
+import 'package:groceries_app/presentation/shared/common_dialogs.dart';
 import 'package:groceries_app/presentation/theme/app_color_schemes.dart';
 import 'package:groceries_app/presentation/theme/app_typography.dart';
 
-class ProductDetailScreen extends StatefulWidget {
-  final ProductDetailEntity product;
+class ProductDetailScreen extends StatelessWidget {
+  final int productId;
 
-  const ProductDetailScreen({super.key, required this.product});
+  const ProductDetailScreen({super.key, required this.productId});
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          GetIt.instance<DetailBloc>()
+            ..add(OnLoadProductDetailEvent(productId)),
+      child: const ProductDetailView(),
+    );
+  }
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class ProductDetailView extends StatefulWidget {
+  const ProductDetailView({super.key});
+
+  @override
+  State<ProductDetailView> createState() => _ProductDetailViewState();
+}
+
+class _ProductDetailViewState extends State<ProductDetailView> {
   int _quantity = 1;
   bool _isFavorite = false;
 
@@ -24,188 +43,279 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorSchemes.white,
-      appBar: AppBar(
-        backgroundColor: AppColorSchemes.grey.withAlpha(25),
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColorSchemes.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(25),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColorSchemes.black,
-              size: 18,
-            ),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              // Logic để trống - sẽ implement sau
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    'Share functionality will be implemented later',
-                  ),
-                  duration: Duration(seconds: 2),
+      body: BlocListener<DetailBloc, DetailState>(
+        listener: (context, state) {
+          if (state.isLoading) {
+            CommonDialogs.showLoadingDialog(context);
+          } else {
+            CommonDialogs.hideLoadingDialog(context);
+            if (state.apiErrorMessage.isNotEmpty) {
+              CommonDialogs.showErrorDialog(
+                context: context,
+                message: state.apiErrorMessage,
+                onTap: () => context.read<DetailBloc>().add(
+                  const OnClearDetailErrorMessage(),
                 ),
               );
-            },
-            child: Container(
-              margin: const EdgeInsets.all(8),
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: AppColorSchemes.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withAlpha(25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Icon(
-                Icons.share_outlined,
-                color: AppColorSchemes.black,
-                size: 20,
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          // Scrollable Content
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Product Image
-                  ProductDetailImageWidget(
-                    imagePath: widget.product.thumbnail,
-                    isFavorite: _isFavorite,
-                    onFavoriteToggle: () {
-                      setState(() {
-                        _isFavorite = !_isFavorite;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  // Product Info with Title, Subtitle, Favorite and Quantity/Price
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            }
+          }
+        },
+        child: BlocBuilder<DetailBloc, DetailState>(
+          builder: (context, state) {
+            final product = state.productDetailEntity;
+
+            if (product == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return Column(
+              children: [
+                // Custom AppBar
+                SafeArea(
+                  child: Container(
+                    height: 60,
+                    color: AppColorSchemes.white,
+                    child: Row(
                       children: [
-                        // Title and Favorite Row
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                widget.product.title,
-                                style: AppTypography.textFont18W600.copyWith(
-                                  color: AppColorSchemes.black,
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            margin: const EdgeInsets.all(8),
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: AppColorSchemes.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withAlpha(25),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
                                 ),
-                              ),
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _isFavorite = !_isFavorite;
-                                });
-                              },
-                              child: Icon(
-                                _isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: _isFavorite
-                                    ? Colors.red
-                                    : AppColorSchemes.grey,
-                                size: 24,
-                              ),
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: AppColorSchemes.black,
+                              size: 18,
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        // Subtitle
-                        Text(
-                          '${widget.product.weight}g, Price',
-                          style: AppTypography.textFont16W500.copyWith(
-                            color: AppColorSchemes.grey,
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        // Quantity and Price Row
-                        Row(
-                          children: [
-                            // Quantity Selector
-                            ProductDetailQuantityWidget(
-                              initialQuantity: _quantity,
-                              onQuantityChanged: (newQuantity) {
-                                setState(() {
-                                  _quantity = newQuantity;
-                                });
-                              },
-                            ),
-                            const Spacer(),
-                            // Price
-                            Text(
-                              '\$${widget.product.price.toStringAsFixed(2)}',
-                              style: AppTypography.textFont26W600.copyWith(
-                                color: AppColorSchemes.black,
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Share functionality will be implemented later',
+                                ),
+                                duration: Duration(seconds: 2),
                               ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(8),
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: AppColorSchemes.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withAlpha(25),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
-                          ],
+                            child: Icon(
+                              Icons.share_outlined,
+                              color: AppColorSchemes.black,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  // Expandable Sections
-                  const ProductDetailSectionsWidget(),
-                ],
-              ),
-            ),
-          ),
-          // Fixed Add to Basket Button
-          const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-            color: AppColorSchemes.white,
-            child: AppButton(
-              content: 'Add To Basket',
-              textStyle: AppTypography.textFont18W600.copyWith(
-                color: AppColorSchemes.white,
-              ),
-              onTap: () {
-                // Logic để trống - sẽ implement sau
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Added ${widget.product.title} (x$_quantity) to basket',
+                ),
+                // Scrollable Content
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10, left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Product Images Slider
+                          ProductDetailImageSliderWidget(
+                            images: product.images.isNotEmpty
+                                ? product.images
+                                : [product.thumbnail],
+                            isFavorite: _isFavorite,
+                            onFavoriteToggle: () {
+                              setState(() {
+                                _isFavorite = !_isFavorite;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 30),
+                          // Product Info
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Title and Favorite Row
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        product.title,
+                                        style: AppTypography.textFont18W600
+                                            .copyWith(
+                                              color: AppColorSchemes.black,
+                                            ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _isFavorite = !_isFavorite;
+                                        });
+                                      },
+                                      child: Icon(
+                                        _isFavorite
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: _isFavorite
+                                            ? Colors.red
+                                            : AppColorSchemes.grey,
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                // Brand and Category
+                                Text(
+                                  '${product.brand.isNotEmpty ? '${product.brand} • ' : ''}${product.category}',
+                                  style: AppTypography.textFont16W500.copyWith(
+                                    color: AppColorSchemes.grey,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                // Rating and Stock
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                      size: 16,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${product.rating.toStringAsFixed(1)} • ',
+                                      style: AppTypography.textFont14W500
+                                          .copyWith(
+                                            color: AppColorSchemes.grey,
+                                          ),
+                                    ),
+                                    Text(
+                                      'Stock: ${product.stock}',
+                                      style: AppTypography.textFont14W500
+                                          .copyWith(
+                                            color: product.stock > 0
+                                                ? AppColorSchemes.green
+                                                : Colors.red,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                // Quantity and Price Row
+                                Row(
+                                  children: [
+                                    // Quantity Selector
+                                    ProductDetailQuantityWidget(
+                                      initialQuantity: _quantity,
+                                      onQuantityChanged: (newQuantity) {
+                                        setState(() {
+                                          _quantity = newQuantity;
+                                        });
+                                      },
+                                    ),
+                                    const Spacer(),
+                                    // Discount and Price
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        if (product.discountPercentage > 0) ...[
+                                          Text(
+                                            '-${product.discountPercentage.toStringAsFixed(0)}%',
+                                            style: AppTypography.textFont14W500
+                                                .copyWith(color: Colors.red),
+                                          ),
+                                          const SizedBox(height: 4),
+                                        ],
+                                        Text(
+                                          '\$${product.price.toStringAsFixed(2)}',
+                                          style: AppTypography.textFont26W600
+                                              .copyWith(
+                                                color: AppColorSchemes.black,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          // Expandable Sections with Real Data
+                          ProductDetailSectionsWidget(
+                            description: product.description,
+                            nutritionInfo:
+                                'Weight: ${product.weight}g\nBrand: ${product.brand}',
+                            reviews: product.reviews,
+                          ),
+                        ],
+                      ),
                     ),
-                    duration: const Duration(seconds: 2),
                   ),
-                );
-              },
-              backgroundColor: AppColorSchemes.green,
-            ),
-          ),
-        ],
+                ),
+                // Fixed Add to Basket Button
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 20,
+                  ),
+                  color: AppColorSchemes.white,
+                  child: AppButton(
+                    content: 'Add To Basket',
+                    textStyle: AppTypography.textFont18W600.copyWith(
+                      color: AppColorSchemes.white,
+                    ),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Added ${product.title} (x$_quantity) to basket',
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                    backgroundColor: AppColorSchemes.green,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
