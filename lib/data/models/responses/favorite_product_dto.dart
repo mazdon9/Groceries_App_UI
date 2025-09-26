@@ -20,6 +20,7 @@
 // }
 
 import 'package:json_annotation/json_annotation.dart';
+
 part 'favorite_product_dto.g.dart';
 
 /// DTO -> Data Transfer Object
@@ -33,7 +34,7 @@ class FavoriteProductDto {
   final int userId;
   final int totalProducts;
   final int totalQuantity;
-  final List<ProductDto> products;
+  final List<FavoriteProductItemDto> products;
 
   FavoriteProductDto(
     this.id,
@@ -54,7 +55,7 @@ class FavoriteProductDto {
 }
 
 @JsonSerializable()
-class ProductDto {
+class FavoriteProductItemDto {
   final int id;
   final String title;
   final double price;
@@ -64,7 +65,7 @@ class ProductDto {
   final double discountedTotal;
   final String thumbnail;
 
-  ProductDto(
+  FavoriteProductItemDto(
     this.id,
     this.title,
     this.price,
@@ -76,9 +77,9 @@ class ProductDto {
   );
 
   /// fromJson
-  factory ProductDto.fromJson(Map<String, dynamic> json) =>
-      _$ProductDtoFromJson(json);
+  factory FavoriteProductItemDto.fromJson(Map<String, dynamic> json) =>
+      _$FavoriteProductItemDtoFromJson(json);
 
   /// toJson
-  Map<String, dynamic> toJson() => _$ProductDtoToJson(this);
+  Map<String, dynamic> toJson() => _$FavoriteProductItemDtoToJson(this);
 }

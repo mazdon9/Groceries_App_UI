@@ -7,9 +7,78 @@ extension ProductMapper on ProductDto {
     return ProductDetailEntity(
       id: id ?? 0,
       title: title ?? '',
+      description: description ?? '',
+      category: category ?? '',
       price: price ?? 0.0,
-      thumbnail: thumbnail ?? '',
+      discountPercentage: discountPercentage ?? 0.0,
+      rating: rating ?? 0.0,
+      stock: stock ?? 0,
+      tags: tags ?? [],
+      brand: brand ?? '',
+      sku: sku ?? '',
       weight: weight ?? 0,
+      dimensions:
+          dimensions?.toDimensionsEntity() ??
+          const DimensionsEntity(width: 0, height: 0, depth: 0),
+      warrantyInformation: warrantyInformation ?? '',
+      shippingInformation: shippingInformation ?? '',
+      availabilityStatus: availabilityStatus ?? '',
+      reviews: reviews?.map((review) => review.toReviewEntity()).toList() ?? [],
+      returnPolicy: returnPolicy ?? '',
+      minimumOrderQuantity: minimumOrderQuantity ?? 1,
+      thumbnail: thumbnail ?? '',
+      images: images ?? [],
+    );
+  }
+
+  /// Map full product detail with all fields
+  ProductDetailEntity toDetailEntity() {
+    return ProductDetailEntity(
+      id: id ?? 0,
+      title: title ?? '',
+      description: description ?? '',
+      category: category ?? '',
+      price: price ?? 0.0,
+      discountPercentage: discountPercentage ?? 0.0,
+      rating: rating ?? 0.0,
+      stock: stock ?? 0,
+      tags: tags ?? [],
+      brand: brand ?? '',
+      sku: sku ?? '',
+      weight: weight ?? 0,
+      dimensions:
+          dimensions?.toDimensionsEntity() ??
+          const DimensionsEntity(width: 0, height: 0, depth: 0),
+      warrantyInformation: warrantyInformation ?? '',
+      shippingInformation: shippingInformation ?? '',
+      availabilityStatus: availabilityStatus ?? '',
+      reviews: reviews?.map((review) => review.toReviewEntity()).toList() ?? [],
+      returnPolicy: returnPolicy ?? '',
+      minimumOrderQuantity: minimumOrderQuantity ?? 1,
+      thumbnail: thumbnail ?? '',
+      images: images ?? [],
+    );
+  }
+}
+
+extension DimensionsMapper on DimensionsDto {
+  DimensionsEntity toDimensionsEntity() {
+    return DimensionsEntity(
+      width: width ?? 0.0,
+      height: height ?? 0.0,
+      depth: depth ?? 0.0,
+    );
+  }
+}
+
+extension ReviewMapper on ReviewDto {
+  ReviewEntity toReviewEntity() {
+    return ReviewEntity(
+      rating: rating ?? 0,
+      comment: comment ?? '',
+      date: date ?? '',
+      reviewerName: reviewerName ?? '',
+      reviewerEmail: reviewerEmail ?? '',
     );
   }
 }

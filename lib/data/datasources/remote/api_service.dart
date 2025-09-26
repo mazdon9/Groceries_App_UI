@@ -52,4 +52,7 @@ abstract class ApiService {
   Future<ProductResponseDto> getProductsByCategory(
     @Path('category') String category,
   );
+
+  @GET('/products/{id}')
+  Future<ProductDto> getProductById(@Path('id') int id);
 }

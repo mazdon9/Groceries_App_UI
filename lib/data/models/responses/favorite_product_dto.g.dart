@@ -15,7 +15,9 @@ FavoriteProductDto _$FavoriteProductDtoFromJson(Map<String, dynamic> json) =>
       (json['totalProducts'] as num).toInt(),
       (json['totalQuantity'] as num).toInt(),
       (json['products'] as List<dynamic>)
-          .map((e) => ProductDto.fromJson(e as Map<String, dynamic>))
+          .map(
+            (e) => FavoriteProductItemDto.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
     );
 
@@ -30,7 +32,9 @@ Map<String, dynamic> _$FavoriteProductDtoToJson(FavoriteProductDto instance) =>
       'products': instance.products,
     };
 
-ProductDto _$ProductDtoFromJson(Map<String, dynamic> json) => ProductDto(
+FavoriteProductItemDto _$FavoriteProductItemDtoFromJson(
+  Map<String, dynamic> json,
+) => FavoriteProductItemDto(
   (json['id'] as num).toInt(),
   json['title'] as String,
   (json['price'] as num).toDouble(),
@@ -41,14 +45,15 @@ ProductDto _$ProductDtoFromJson(Map<String, dynamic> json) => ProductDto(
   json['thumbnail'] as String,
 );
 
-Map<String, dynamic> _$ProductDtoToJson(ProductDto instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'price': instance.price,
-      'quantity': instance.quantity,
-      'total': instance.total,
-      'discountPercentage': instance.discountPercentage,
-      'discountedTotal': instance.discountedTotal,
-      'thumbnail': instance.thumbnail,
-    };
+Map<String, dynamic> _$FavoriteProductItemDtoToJson(
+  FavoriteProductItemDto instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'price': instance.price,
+  'quantity': instance.quantity,
+  'total': instance.total,
+  'discountPercentage': instance.discountPercentage,
+  'discountedTotal': instance.discountedTotal,
+  'thumbnail': instance.thumbnail,
+};
