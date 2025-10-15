@@ -10,7 +10,14 @@
 </p>
 
 **Flutter UI Demo:**  
-[![Watch the Demo](assets/screenshots/play_thumb.png)](https://youtube.com/shorts/kq5CxP-V1uM?feature=share)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a63036e1-57ab-4f41-aba7-35e53a8aaf2d" 
+       alt="App Demo" 
+       width="250"/>
+  <br/>
+  <em>🎥 App Demo Preview</em>
+</p>
+
 
 ## Overview  
 **Groceries_App_UI** is a modern mobile UI built with Flutter for Android & iOS, designed for an intuitive and seamless online grocery shopping experience.  
