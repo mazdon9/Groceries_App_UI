@@ -2,21 +2,24 @@
 # Groceries_App_UI 🛒📱  
 
 [Add some screenshots here: Home screen, product list, cart, wishlist...]  
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/2ad5cef4-cdd8-442b-9c3a-edb98e4a5352" alt="home_page_screen_shoot" width="22%"/>
-  <img src="https://github.com/user-attachments/assets/a4bc3a00-f7ce-404a-bf2c-e679ccc6a557" alt="home_page_screen_shoot3" width="22%"/>
-  <img src="https://github.com/user-attachments/assets/f229a785-86be-467e-a291-09a1d10228c8" alt="home_page_screen_shoot4" width="22%"/>
-  <img src="https://github.com/user-attachments/assets/1112e927-635c-440f-bfcd-5d8fdbf39b72" alt="home_page_screen_shoot5" width="22%"/>
-</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e5195ad1-b0d7-4cbc-87b0-cc54fb439c8c" alt="Screenshot 1" width="18%"/>
+  <img src="https://github.com/user-attachments/assets/7e899b29-341a-48f1-b5d3-d92e9dc63d13" alt="Screenshot 2" width="18%"/>
+  <img src="https://github.com/user-attachments/assets/3055938b-d050-460b-b325-73f93ec1e0f4" alt="Screenshot 3" width="18%"/>
+  <img src="https://github.com/user-attachments/assets/520fa59c-6160-40a7-b164-e6bbbbbcbcef" alt="Screenshot 4" width="18%"/>
+  <img src="https://github.com/user-attachments/assets/67da750e-402c-40ed-b006-38d7574cac2a" alt="Screenshot 5" width="18%"/>
+</p>
 **Flutter UI Demo:**  
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/a63036e1-57ab-4f41-aba7-35e53a8aaf2d" 
-       alt="App Demo" 
+  <img src="https://github.com/user-attachments/assets/bbbda1db-18b5-4b47-96f6-e0bdadd30f1b"
+       alt="App Demo"
        width="250"/>
   <br/>
   <em>🎥 App Demo Preview</em>
 </p>
+
+
 
 
 ## Overview  
