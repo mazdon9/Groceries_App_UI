@@ -2,10 +2,12 @@
 # Groceries_App_UI 🛒📱  
 
 [Add some screenshots here: Home screen, product list, cart, wishlist...]  
-<img width="557" height="1178" alt="home_page_screen_shoot" src="https://github.com/user-attachments/assets/2ad5cef4-cdd8-442b-9c3a-edb98e4a5352" />
-<img width="516" height="1094" alt="home_page_screen_shoot3" src="https://github.com/user-attachments/assets/a4bc3a00-f7ce-404a-bf2c-e679ccc6a557" />
-<img width="397" height="1004" alt="home_page_screen_shoot4" src="https://github.com/user-attachments/assets/f229a785-86be-467e-a291-09a1d10228c8" />
-<img width="408" height="1031" alt="home_page_screen_shoot5" src="https://github.com/user-attachments/assets/1112e927-635c-440f-bfcd-5d8fdbf39b72" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2ad5cef4-cdd8-442b-9c3a-edb98e4a5352" alt="home_page_screen_shoot" width="22%"/>
+  <img src="https://github.com/user-attachments/assets/a4bc3a00-f7ce-404a-bf2c-e679ccc6a557" alt="home_page_screen_shoot3" width="22%"/>
+  <img src="https://github.com/user-attachments/assets/f229a785-86be-467e-a291-09a1d10228c8" alt="home_page_screen_shoot4" width="22%"/>
+  <img src="https://github.com/user-attachments/assets/1112e927-635c-440f-bfcd-5d8fdbf39b72" alt="home_page_screen_shoot5" width="22%"/>
+</p>
 
 **Flutter UI Demo:**  
 [Add a ~20s video preview here]
